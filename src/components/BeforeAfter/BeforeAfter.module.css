@@ -1,0 +1,40 @@
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--color-line);
+}
+
+.compare figure {
+  margin: 0;
+  background: var(--color-ink);
+}
+
+.placeholder {
+  aspect-ratio: 4 / 3;
+  background:
+    linear-gradient(135deg, rgba(216, 210, 200, 0.22), transparent 55%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 20px),
+    #111924;
+}
+
+.after {
+  background:
+    linear-gradient(135deg, rgba(47, 125, 255, 0.28), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.09) 0 1px, transparent 1px 18px),
+    #172334;
+}
+
+.compare figcaption {
+  padding: 0.75rem;
+  color: var(--color-stone);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .compare {
+    grid-template-columns: 1fr;
+  }
+}

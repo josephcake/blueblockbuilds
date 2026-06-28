@@ -1,0 +1,65 @@
+.fallback {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 76% 20%, rgba(47, 125, 255, 0.18), transparent 26rem),
+    linear-gradient(145deg, #05080d, #071427 62%, #111822);
+}
+
+.fallback span {
+  position: absolute;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(216, 210, 200, 0.12);
+  transform: rotate(-12deg);
+}
+
+.blockA {
+  width: 28vw;
+  height: 18vw;
+  right: 14vw;
+  top: 22vh;
+}
+
+.blockB {
+  width: 18vw;
+  height: 26vw;
+  right: 33vw;
+  top: 38vh;
+  background: rgba(47, 125, 255, 0.16) !important;
+}
+
+.blockC {
+  width: 22vw;
+  height: 9vw;
+  right: 8vw;
+  top: 54vh;
+}
+
+.blockD {
+  width: 16vw;
+  height: 16vw;
+  right: 28vw;
+  top: 18vh;
+  border-radius: 50% 50% 42% 42%;
+  background: rgba(247, 248, 250, 0.12) !important;
+}
+
+@media (max-width: 760px) {
+  .fallback {
+    opacity: 0.62;
+  }
+
+  .blockA {
+    width: 58vw;
+    height: 32vw;
+    right: -10vw;
+    top: 42vh;
+  }
+
+  .blockB,
+  .blockC {
+    display: none !important;
+  }
+}

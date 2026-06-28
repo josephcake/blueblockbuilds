@@ -1,0 +1,20 @@
+.section {
+  padding: 7rem 0;
+}
+
+.area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.area span {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-line);
+  background: rgba(5, 8, 13, 0.56);
+  color: var(--color-stone);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 2.4rem);
+  text-transform: uppercase;
+}

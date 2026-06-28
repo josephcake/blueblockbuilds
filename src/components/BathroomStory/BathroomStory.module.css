@@ -1,0 +1,11 @@
+.section {
+  min-height: 90svh;
+  display: grid;
+  align-items: center;
+  padding: 7rem 0;
+}
+
+.copy {
+  margin-left: auto;
+  width: min(760px, 100%);
+}

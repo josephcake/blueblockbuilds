@@ -1,0 +1,45 @@
+.section {
+  padding: 7rem 0;
+  background: rgba(5, 8, 13, 0.62);
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.filters button {
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-white);
+  padding: 0.7rem 0.9rem;
+  font-weight: 800;
+}
+
+.filters .selected {
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+
+.list {
+  margin-top: 3rem;
+}
+
+@media (max-width: 820px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    justify-content: flex-start;
+  }
+}

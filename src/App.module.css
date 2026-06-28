@@ -1,0 +1,33 @@
+.sceneLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 20vw),
+    radial-gradient(circle at 78% 20%, rgba(20, 87, 217, 0.18), transparent 30rem),
+    radial-gradient(circle at 52% 76%, rgba(216, 210, 200, 0.08), transparent 24rem),
+    linear-gradient(135deg, var(--color-ink), var(--color-navy) 58%, #0b1118);
+}
+
+.sceneLayer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(5, 8, 13, 0.25), transparent 28%, transparent 72%, rgba(5, 8, 13, 0.32)),
+    linear-gradient(180deg, rgba(5, 8, 13, 0), rgba(5, 8, 13, 0.64));
+}
+
+:global(main),
+:global(header),
+:global(footer) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  .sceneLayer {
+    opacity: 0.28;
+  }
+}
