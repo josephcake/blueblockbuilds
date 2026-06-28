@@ -9,7 +9,7 @@ export default function BathroomStory() {
           <SectionHeading
             eyebrow="Bathroom showcase"
             title="Bathrooms built for the quieter moments."
-            body="We bring together proportion, lighting, fixtures, surfaces, and storage to create bathrooms that feel calm and work beautifully."
+            body="The bathroom scene brings the freestanding bathtub and toilet into focus with calm proportions, controlled lighting, and fixture movement."
           />
         </div>
       </div>
