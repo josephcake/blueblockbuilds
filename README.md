@@ -51,7 +51,7 @@ Before launch, replace all `PLACEHOLDER_*` values with verified business details
 
 ## Project Images
 
-The sample portfolio uses local CSS-generated placeholder artwork so no third-party licensing is involved. Add real optimized images under `public/images/projects/`, then update `coverImage`, `gallery`, `beforeImage`, and `afterImage` in `src/data/projects.js`.
+The portfolio uses local optimized project photography. Add real optimized images under `public/images/projects/`, then update `coverImage` and `gallery` in `src/data/projects.js`.
 
 Use AVIF or WebP with multiple responsive sizes where possible.
 

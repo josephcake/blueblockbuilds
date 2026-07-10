@@ -12,10 +12,13 @@ export const projects = [
       { src: "/images/projects/kitchen/kitchen2.jpeg", alt: "Kitchen renovation cabinetry and countertop view" },
       { src: "/images/projects/kitchen/kitchen3.jpeg", alt: "Kitchen renovation sink and fixture detail" },
       { src: "/images/projects/kitchen/kitchen4.jpeg", alt: "Kitchen renovation storage and finish detail" },
-      { src: "/images/projects/kitchen/kitchen5.jpeg", alt: "Kitchen renovation wide finished view" }
+      { src: "/images/projects/kitchen/kitchen5.jpeg", alt: "Kitchen renovation wide finished view" },
+      { src: "/images/projects/kitchen/kitchen6.jpeg", alt: "Kitchen renovation finished cabinetry detail" },
+      { src: "/images/projects/kitchen/kitchen7.jpeg", alt: "Kitchen renovation finished counter detail" },
+      { src: "/images/projects/kitchen/kitchen8.jpeg", alt: "Kitchen renovation finished material detail" },
+      { src: "/images/projects/kitchen/kitchen9.jpeg", alt: "Kitchen renovation completed room view" },
+      { src: "/images/projects/kitchen/kitchen10.jpeg", alt: "Kitchen renovation completed wide view" }
     ],
-    beforeImage: "/images/projects/kitchen/kitchen9.jpeg",
-    afterImage: "/images/projects/kitchen/kitchen10.jpeg",
     scope: ["Custom cabinetry", "Kitchen island", "Countertops", "Lighting", "Flooring"],
     featured: true
   },
@@ -31,10 +34,9 @@ export const projects = [
     gallery: [
       { src: "/images/projects/living-room/living_room2.jpeg", alt: "Living room renovation seating area detail" },
       { src: "/images/projects/living-room/living_room3.jpeg", alt: "Living room finish refresh and wall detail" },
-      { src: "/images/projects/living-room/living_room4.jpeg", alt: "Living room renovation material and fixture detail" }
+      { src: "/images/projects/living-room/living_room4.jpeg", alt: "Living room renovation material and fixture detail" },
+      { src: "/images/projects/living-room/living_room5.jpeg", alt: "Living room renovation completed room detail" }
     ],
-    beforeImage: "/images/projects/living-room/living_room2.jpeg",
-    afterImage: "/images/projects/living-room/living_room5.jpeg",
     scope: ["Layout planning", "Structural coordination", "Cabinetry", "Lighting", "Finish carpentry"],
     featured: false
   },
@@ -51,10 +53,9 @@ export const projects = [
       { src: "/images/projects/bathroom/bathroom1.jpeg", alt: "Bathroom renovation vertical vanity detail" },
       { src: "/images/projects/bathroom/bathroom2.jpeg", alt: "Bathroom renovation fixture and tile detail" },
       { src: "/images/projects/bathroom/bathroom4.jpeg", alt: "Bathroom renovation finished surface detail" },
+      { src: "/images/projects/bathroom/bathroom5.jpeg", alt: "Bathroom renovation completed finish detail" },
       { src: "/images/projects/bathroom/bathroom6.jpeg", alt: "Bathroom renovation wide finished view" }
     ],
-    beforeImage: "/images/projects/bathroom/bathroom5.jpeg",
-    afterImage: "/images/projects/bathroom/bathroom6.jpeg",
     scope: ["Freestanding tub", "Vanity", "Tile", "Fixtures", "Lighting"],
     featured: false
   },
@@ -70,10 +71,9 @@ export const projects = [
     gallery: [
       { src: "/images/projects/bathroom/bathroom7.jpeg", alt: "Compact bathroom renovation vertical detail" },
       { src: "/images/projects/bathroom/bathroom2.jpeg", alt: "Compact bathroom fixture view" },
-      { src: "/images/projects/bathroom/bathroom4.jpeg", alt: "Compact bathroom tile and finish view" }
+      { src: "/images/projects/bathroom/bathroom4.jpeg", alt: "Compact bathroom tile and finish view" },
+      { src: "/images/projects/bathroom/bathroom8.jpeg", alt: "Compact bathroom completed finish view" }
     ],
-    beforeImage: "/images/projects/bathroom/bathroom7.jpeg",
-    afterImage: "/images/projects/bathroom/bathroom8.jpeg",
     scope: ["Vanity", "Tile", "Plumbing fixtures", "Lighting", "Paint"],
     featured: false
   },
@@ -90,10 +90,13 @@ export const projects = [
       { src: "/images/projects/kitchen-island/kitchen_island2.jpeg", alt: "Kitchen island cabinet installation detail" },
       { src: "/images/projects/kitchen-island/kitchen_island3.jpeg", alt: "Kitchen island countertop and cabinet view" },
       { src: "/images/projects/kitchen-island/kitchen_island4.jpeg", alt: "Kitchen island storage and finish detail" },
-      { src: "/images/projects/kitchen-island/kitchen_island5.jpeg", alt: "Kitchen island finished wide view" }
+      { src: "/images/projects/kitchen-island/kitchen_island5.jpeg", alt: "Kitchen island finished wide view" },
+      { src: "/images/projects/kitchen-island/kitchen_island6.jpeg", alt: "Kitchen island completed cabinet detail" },
+      { src: "/images/projects/kitchen-island/kitchen_island7.jpeg", alt: "Kitchen island completed countertop detail" },
+      { src: "/images/projects/kitchen-island/kitchen_island8.jpeg", alt: "Kitchen island completed material detail" },
+      { src: "/images/projects/kitchen-island/kitchen_island9.jpeg", alt: "Kitchen island completed room view" },
+      { src: "/images/projects/kitchen-island/kitchen_island10.jpeg", alt: "Kitchen island completed wide view" }
     ],
-    beforeImage: "/images/projects/kitchen-island/kitchen_island9.jpeg",
-    afterImage: "/images/projects/kitchen-island/kitchen_island10.jpeg",
     scope: ["Kitchen island", "Cabinet boxes", "Cabinet doors", "Hardware", "Countertops"],
     featured: false
   },
@@ -109,10 +112,9 @@ export const projects = [
     gallery: [
       { src: "/images/projects/living-room/living_room1.jpeg", alt: "Interior finish refresh wide living room view" },
       { src: "/images/projects/living-room/living_room3.jpeg", alt: "Interior finish refresh wall and trim detail" },
-      { src: "/images/projects/living-room/living_room4.jpeg", alt: "Interior finish refresh material detail" }
+      { src: "/images/projects/living-room/living_room4.jpeg", alt: "Interior finish refresh material detail" },
+      { src: "/images/projects/living-room/living_room2.jpeg", alt: "Interior finish refresh completed seating detail" }
     ],
-    beforeImage: "/images/projects/living-room/living_room4.jpeg",
-    afterImage: "/images/projects/living-room/living_room5.jpeg",
     scope: ["Finish carpentry", "Fixtures", "Paint", "Flooring", "Hardware"],
     featured: false
   }

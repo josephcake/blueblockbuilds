@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import BeforeAfter from "../BeforeAfter/BeforeAfter.jsx";
 import { useEscapeKey } from "../../hooks/useEscapeKey.js";
 import { useFocusTrap } from "../../hooks/useFocusTrap.js";
 import { useScrollLock } from "../../hooks/useScrollLock.js";
@@ -57,7 +56,6 @@ export default function ProjectModal({ project, projects, onClose, onSelect, ret
               )
             ))}
           </div>
-          <BeforeAfter project={project} />
           <div className={styles.controls}>
             <button type="button" onClick={() => onSelect(prev)}>{prev.title}</button>
             <button type="button" onClick={() => onSelect(next)}>{next.title}</button>
