@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "pages:dev": "wrangler pages dev dist"
   },
   "dependencies": {
     "@react-three/drei": "^9.122.0",
@@ -16,6 +17,7 @@
     "gsap": "^3.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "resend": "^6.17.2",
     "three": "^0.171.0"
   },
   "devDependencies": {
@@ -28,6 +30,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "jsdom": "^25.0.1",
     "vite": "^6.0.7",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "wrangler": "^4.110.0"
   }
 }

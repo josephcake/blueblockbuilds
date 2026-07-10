@@ -5,12 +5,7 @@ import { useThree } from "@react-three/fiber";
 import ExplorerScene from "../../three/explorer/ExplorerScene.jsx";
 import styles from "./InteractiveExplorer.module.css";
 
-const cameraPositions = {
-  front: [0, 1.15, 6.1],
-  "three-quarter": [3.9, 2.05, 5.2],
-  top: [0.2, 6.8, 1.2],
-  detail: [1.7, 1.1, 3.45]
-};
+const defaultCameraPosition = [3.9, 2.05, 5.2];
 
 function supportsWebGL() {
   if (typeof window === "undefined") return false;
@@ -22,16 +17,15 @@ function supportsWebGL() {
   }
 }
 
-function CameraPresetApplier({ preset, resetSignal, controlsRef }) {
+function CameraResetApplier({ resetSignal, controlsRef }) {
   const { camera } = useThree();
 
   useEffect(() => {
-    const position = cameraPositions[preset] || cameraPositions["three-quarter"];
-    camera.position.set(...position);
+    camera.position.set(...defaultCameraPosition);
     camera.lookAt(0, 0.25, 0);
     controlsRef.current?.target.set(0, 0.25, 0);
     controlsRef.current?.update();
-  }, [camera, controlsRef, preset, resetSignal]);
+  }, [camera, controlsRef, resetSignal]);
 
   return null;
 }
@@ -52,8 +46,8 @@ export default function ExplorerViewer(props) {
   return (
     <div className={styles.viewer} aria-label={`${props.category.label} interactive 3D viewer`}>
       <Canvas dpr={[1, 1.7]} gl={{ antialias: true, powerPreference: "high-performance" }} shadows>
-        <PerspectiveCamera makeDefault position={cameraPositions[props.cameraPreset] || cameraPositions["three-quarter"]} fov={38} />
-        <CameraPresetApplier preset={props.cameraPreset} resetSignal={props.cameraReset} controlsRef={controlsRef} />
+        <PerspectiveCamera makeDefault position={defaultCameraPosition} fov={38} />
+        <CameraResetApplier resetSignal={props.cameraReset} controlsRef={controlsRef} />
         <ExplorerScene {...props} />
         <OrbitControls
           ref={controlsRef}

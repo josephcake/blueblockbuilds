@@ -5,9 +5,10 @@ import styles from "./Header.module.css";
 
 const links = [
   ["Expertise", "#expertise"],
-  ["Studio", "#studio"],
-  ["Explorer", "#explorer"],
+  // ["Studio", "#studio"],
+  // ["Explorer", "#explorer"],
   ["Process", "#process"],
+  ["Portfolio", "#portfolio"],
   ["About", "#about"],
   ["Contact", "#contact"]
 ];

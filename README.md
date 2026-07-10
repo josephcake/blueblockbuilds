@@ -33,13 +33,21 @@ Cloudflare Pages settings:
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and set:
+Copy `.env.example` to `.env` if you need to override the contact form endpoint locally.
 
-```bash
-VITE_CONTACT_FORM_ENDPOINT=
-```
+The estimate form posts to `/api/contact`, a Cloudflare Pages Function that emails submissions to `info@blueblockbuilds.com` through [Resend](https://resend.com).
 
-The estimate form posts `FormData` to this endpoint. It is ready for Formspree, Basin, or a Cloudflare Worker. Optional photo uploads depend on the selected provider and must be enabled there too.
+Set these secrets in the Cloudflare Pages dashboard before launch:
+
+- `RESEND_API_KEY` — API key from Resend (never commit this to git)
+- `CONTACT_TO_EMAIL` — optional, defaults to `info@blueblockbuilds.com`
+- `CONTACT_FROM_EMAIL` — optional, defaults to `onboarding@resend.dev`
+
+For local function testing, copy `.dev.vars.example` to `.dev.vars`, add your Resend API key, then run `npm run build && npm run pages:dev`.
+
+Once `blueblockbuilds.com` is verified in Resend, switch `CONTACT_FROM_EMAIL` to something like `Blue Block Builds <notifications@blueblockbuilds.com>`.
+
+Optional photo uploads are sent as email attachments. Each file must be JPG, PNG, WebP, or PDF and 5 MB or smaller.
 
 ## Editing Content
 
@@ -87,6 +95,6 @@ WebGL fallback testing:
 
 - Canonical URL in `index.html`
 - Open Graph image in `index.html`
-- Phone, email, Instagram, contractor registration in `src/data/site.js`
+- Phone, email, and privacy link in `src/data/site.js`
 - Verified business copy, testimonials, and service proof points
-- Verified contact form endpoint
+- Resend API key and verified sender domain in Cloudflare Pages

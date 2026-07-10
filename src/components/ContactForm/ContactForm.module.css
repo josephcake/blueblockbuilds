@@ -69,6 +69,20 @@
   color: #ffb7b7;
 }
 
+.error a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .success {
   color: #bdf2d0;
 }

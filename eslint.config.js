@@ -46,6 +46,19 @@ export default [
   }
   ,
   {
+    files: ["functions/**/*.js"],
+    languageOptions: {
+      globals: {
+        Response: "readonly",
+        fetch: "readonly",
+        FormData: "readonly",
+        File: "readonly",
+        btoa: "readonly",
+        console: "readonly"
+      }
+    }
+  },
+  {
     files: ["src/three/**/*.{js,jsx}"],
     rules: {
       "react/no-unknown-property": "off"

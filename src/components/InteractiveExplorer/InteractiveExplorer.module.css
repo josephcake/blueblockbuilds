@@ -77,8 +77,7 @@
 
 .activeCategory,
 .activeSegment,
-.activeMode,
-.activeTool {
+.activeMode {
   background: rgba(216, 210, 200, 0.13) !important;
   border-color: rgba(216, 210, 200, 0.68) !important;
   color: var(--color-stone) !important;

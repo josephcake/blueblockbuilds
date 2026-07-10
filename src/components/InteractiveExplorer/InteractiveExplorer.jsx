@@ -5,7 +5,6 @@ import SectionHeading from "../SectionHeading/SectionHeading.jsx";
 import styles from "./InteractiveExplorer.module.css";
 
 const lightPresets = ["showroom", "daylight", "warm interior", "dark studio"];
-const cameraPresets = ["front", "three-quarter", "top", "detail"];
 const ExplorerViewer = lazy(() => import("./ExplorerViewer.jsx"));
 
 function getVariant(category, id) {
@@ -23,7 +22,6 @@ export default function InteractiveExplorer() {
   const [powered, setPowered] = useState(true);
   const [motion, setMotion] = useState(64);
   const [lightPreset, setLightPreset] = useState(lightPresets[0]);
-  const [cameraPreset, setCameraPreset] = useState(cameraPresets[1]);
   const [cameraReset, setCameraReset] = useState(0);
   const reducedMotion = useReducedMotion();
 
@@ -36,8 +34,7 @@ export default function InteractiveExplorer() {
     setCompare(false);
   };
 
-  const applyCameraPreset = (preset) => {
-    setCameraPreset(preset);
+  const resetCamera = () => {
     setCameraReset((current) => current + 1);
   };
 
@@ -149,14 +146,9 @@ export default function InteractiveExplorer() {
           </aside>
 
           <div className={styles.stage}>
-            <div className={styles.toolbar} aria-label="Viewer presets">
+            <div className={styles.toolbar} aria-label="Viewer controls">
               <div>
-                {cameraPresets.map((item) => (
-                  <button key={item} className={cameraPreset === item ? styles.activeTool : ""} type="button" onClick={() => applyCameraPreset(item)}>
-                    {item}
-                  </button>
-                ))}
-                <button type="button" onClick={() => applyCameraPreset(cameraPreset)}>
+                <button type="button" onClick={resetCamera}>
                   Reset view
                 </button>
               </div>
@@ -176,7 +168,6 @@ export default function InteractiveExplorer() {
                 powered={powered}
                 motion={motion / 100}
                 lightPreset={lightPreset}
-                cameraPreset={cameraPreset}
                 cameraReset={cameraReset}
                 reducedMotion={reducedMotion}
               />

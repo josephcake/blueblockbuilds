@@ -3,10 +3,11 @@ import Header from "./components/Header/Header.jsx";
 import Hero from "./components/Hero/Hero.jsx";
 import Expertise from "./components/Expertise/Expertise.jsx";
 import KitchenStory from "./components/KitchenStory/KitchenStory.jsx";
-import InteractiveStudio from "./components/InteractiveStudio/InteractiveStudio.jsx";
-import InteractiveExplorer from "./components/InteractiveExplorer/InteractiveExplorer.jsx";
+// import InteractiveStudio from "./components/InteractiveStudio/InteractiveStudio.jsx";
+// import InteractiveExplorer from "./components/InteractiveExplorer/InteractiveExplorer.jsx";
 import BathroomStory from "./components/BathroomStory/BathroomStory.jsx";
 import Process from "./components/Process/Process.jsx";
+import Portfolio from "./components/Portfolio/Portfolio.jsx";
 import About from "./components/About/About.jsx";
 import ServiceArea from "./components/ServiceArea/ServiceArea.jsx";
 import ContactForm from "./components/ContactForm/ContactForm.jsx";
@@ -55,10 +56,11 @@ export default function App() {
         <Hero />
         <Expertise />
         <KitchenStory />
-        <InteractiveStudio />
-        <InteractiveExplorer />
+        {/* <InteractiveStudio /> */}
+        {/* <InteractiveExplorer /> */}
         <BathroomStory />
         <Process />
+        <Portfolio />
         <About />
         <ServiceArea />
         <ContactForm />

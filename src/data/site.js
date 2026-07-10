@@ -9,9 +9,7 @@ export const serviceAreas = ["Seattle", "Bothell", "Lynnwood", "Mountlake Terrac
 
 // PLACEHOLDERS: update with verified business details before launch.
 export const contactDetails = {
-  phone: "PLACEHOLDER_PHONE",
-  email: "PLACEHOLDER_EMAIL",
-  instagram: "PLACEHOLDER_INSTAGRAM",
-  contractorRegistration: "PLACEHOLDER_CONTRACTOR_REGISTRATION",
+  phone: "1-646-354-8975",
+  email: "info@blueblockbuilds.com",
   privacyUrl: "#privacy"
 };
