@@ -44,13 +44,14 @@ The estimate form posts `FormData` to this endpoint. It is ready for Formspree, 
 ## Editing Content
 
 - Services: `src/data/services.js`
+- 3D product explorer categories and variants: `src/data/explorerCategories.js`
 - Process, service area, contact placeholders: `src/data/site.js`
 
 Before launch, replace all `PLACEHOLDER_*` values with verified business details. Do not add license numbers, claims, or awards unless they are confirmed.
 
 ## Visual Direction
 
-The site is intentionally focused on interactive 3D renovation storytelling, using modeled kitchens, bathrooms, cabinetry, fixtures, and finish details as the primary proof of craft.
+The site is intentionally focused on interactive 3D renovation storytelling, using modeled kitchens, bathrooms, cabinetry, fixtures, and finish details as the primary proof of craft. The product explorer is data-driven in `src/data/explorerCategories.js`, with reusable React Three Fiber geometry in `src/three/explorer/`.
 
 ## Replacing 3D Placeholders
 

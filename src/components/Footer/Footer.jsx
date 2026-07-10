@@ -13,6 +13,7 @@ export default function Footer() {
           <nav aria-label="Footer navigation">
             <a href="#expertise">Expertise</a>
             <a href="#studio">Studio</a>
+            <a href="#explorer">Explorer</a>
             <a href="#process">Process</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>

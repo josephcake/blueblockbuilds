@@ -6,6 +6,7 @@ import styles from "./Header.module.css";
 const links = [
   ["Expertise", "#expertise"],
   ["Studio", "#studio"],
+  ["Explorer", "#explorer"],
   ["Process", "#process"],
   ["About", "#about"],
   ["Contact", "#contact"]

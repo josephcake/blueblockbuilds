@@ -4,6 +4,7 @@ import Hero from "./components/Hero/Hero.jsx";
 import Expertise from "./components/Expertise/Expertise.jsx";
 import KitchenStory from "./components/KitchenStory/KitchenStory.jsx";
 import InteractiveStudio from "./components/InteractiveStudio/InteractiveStudio.jsx";
+import InteractiveExplorer from "./components/InteractiveExplorer/InteractiveExplorer.jsx";
 import BathroomStory from "./components/BathroomStory/BathroomStory.jsx";
 import Process from "./components/Process/Process.jsx";
 import About from "./components/About/About.jsx";
@@ -55,6 +56,7 @@ export default function App() {
         <Expertise />
         <KitchenStory />
         <InteractiveStudio />
+        <InteractiveExplorer />
         <BathroomStory />
         <Process />
         <About />
