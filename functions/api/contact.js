@@ -67,14 +67,12 @@ function buildEmailHtml(values) {
   const fullName = `${values.firstName} ${values.lastName}`.trim();
 
   const rows = [
-    ["Name", fullName],
+    ["Name", fullName || "Not provided"],
     ["Email", values.email],
-    ["Phone", values.phone || "Not provided"],
-    ["Project location", values.projectLocation],
-    ["Project type", values.projectType],
-    ["Budget", values.budget || "Not provided"],
-    ["Desired start date", values.startDate || "Not provided"],
-    ["Description", values.description]
+    ["Phone", values.phone],
+    ["Project location", values.projectLocation || "Not provided"],
+    ["Project type", values.projectType || "Not provided"],
+    ["Description", values.description || "Not provided"]
   ];
 
   const tableRows = rows
@@ -158,19 +156,21 @@ function buildEmailHtml(values) {
 }
 
 function buildEmailText(values) {
+  const fullName =
+    `${values.firstName} ${values.lastName}`.trim() ||
+    "Not provided";
+
   return [
     "New estimate request",
     "",
-    `Name: ${values.firstName} ${values.lastName}`,
+    `Name: ${fullName}`,
     `Email: ${values.email}`,
-    `Phone: ${values.phone || "Not provided"}`,
-    `Project location: ${values.projectLocation}`,
-    `Project type: ${values.projectType}`,
-    `Budget: ${values.budget || "Not provided"}`,
-    `Desired start date: ${values.startDate || "Not provided"}`,
+    `Phone: ${values.phone}`,
+    `Project location: ${values.projectLocation || "Not provided"}`,
+    `Project type: ${values.projectType || "Not provided"}`,
     "",
     "Description:",
-    values.description
+    values.description || "Not provided"
   ].join("\n");
 }
 
@@ -241,32 +241,8 @@ export async function onRequest(context) {
       formData.get("projectLocation") || ""
     ).trim(),
     projectType: String(formData.get("projectType") || "").trim(),
-    budget: String(formData.get("budget") || "").trim(),
-    startDate: String(formData.get("startDate") || "").trim(),
     description: String(formData.get("description") || "").trim()
   };
-
-  if (!values.firstName) {
-    return jsonResponse(
-      request,
-      {
-        success: false,
-        error: "First name is required."
-      },
-      400
-    );
-  }
-
-  if (!values.lastName) {
-    return jsonResponse(
-      request,
-      {
-        success: false,
-        error: "Last name is required."
-      },
-      400
-    );
-  }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
     return jsonResponse(
@@ -279,34 +255,12 @@ export async function onRequest(context) {
     );
   }
 
-  if (!values.projectLocation) {
+  if (!values.phone) {
     return jsonResponse(
       request,
       {
         success: false,
-        error: "Project address or ZIP code is required."
-      },
-      400
-    );
-  }
-
-  if (!values.projectType) {
-    return jsonResponse(
-      request,
-      {
-        success: false,
-        error: "Project type is required."
-      },
-      400
-    );
-  }
-
-  if (values.description.length < 20) {
-    return jsonResponse(
-      request,
-      {
-        success: false,
-        error: "Project description must be at least 20 characters."
+        error: "Phone number is required."
       },
       400
     );
@@ -366,13 +320,14 @@ export async function onRequest(context) {
 
   const fullName =
     `${values.firstName} ${values.lastName}`.trim();
+  const subjectName = fullName || values.phone;
 
   try {
     const { data, error } = await resend.emails.send({
       from: env.CONTACT_FROM_EMAIL || DEFAULT_FROM_EMAIL,
       to: [env.CONTACT_TO_EMAIL || DEFAULT_TO_EMAIL],
       replyTo: values.email,
-      subject: `Estimate request from ${fullName}`,
+      subject: `Estimate request from ${subjectName}`,
       html: buildEmailHtml(values),
       text: buildEmailText(values),
       attachments:

@@ -13,8 +13,6 @@ const initialValues = {
   phone: "",
   projectLocation: "",
   projectType: "",
-  budget: "",
-  startDate: "",
   description: ""
 };
 
@@ -24,14 +22,6 @@ const projectTypes = [
   "Kitchen and bathroom",
   "Interior renovation",
   "Other"
-];
-
-const budgets = [
-  "Not sure yet",
-  "Under $25k",
-  "$25k-$50k",
-  "$50k-$100k",
-  "$100k+"
 ];
 
 const maxFileSize = 5 * 1024 * 1024;
@@ -47,30 +37,12 @@ const allowedTypes = [
 function validate(values, files) {
   const errors = {};
 
-  if (!values.firstName.trim()) {
-    errors.firstName = "First name is required.";
-  }
-
-  if (!values.lastName.trim()) {
-    errors.lastName = "Last name is required.";
-  }
-
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
     errors.email = "Enter a valid email address.";
   }
 
-  if (!values.projectLocation.trim()) {
-    errors.projectLocation =
-      "Project address or ZIP code is required.";
-  }
-
-  if (!values.projectType) {
-    errors.projectType = "Choose a project type.";
-  }
-
-  if (values.description.trim().length < 20) {
-    errors.description =
-      "Share at least 20 characters about the project.";
+  if (!values.phone.trim()) {
+    errors.phone = "Phone number is required.";
   }
 
   if (files.length > maxFiles) {
@@ -341,6 +313,7 @@ export default function ContactForm() {
                   value={values.email}
                   onChange={update}
                   autoComplete="email"
+                  required
                   aria-invalid={Boolean(errors.email)}
                   aria-describedby={
                     errors.email
@@ -358,11 +331,19 @@ export default function ContactForm() {
                   value={values.phone}
                   onChange={update}
                   autoComplete="tel"
+                  required
+                  aria-invalid={Boolean(errors.phone)}
+                  aria-describedby={
+                    errors.phone
+                      ? "phone-error"
+                      : undefined
+                  }
                 />
               </label>
             </div>
 
             {fieldError("email")}
+            {fieldError("phone")}
 
             <label>
               Project address or ZIP code
@@ -413,39 +394,9 @@ export default function ContactForm() {
                   ))}
                 </select>
               </label>
-
-              <label>
-                Estimated budget
-                <select
-                  name="budget"
-                  value={values.budget}
-                  onChange={update}
-                >
-                  <option value="">Select one</option>
-
-                  {budgets.map((budget) => (
-                    <option
-                      key={budget}
-                      value={budget}
-                    >
-                      {budget}
-                    </option>
-                  ))}
-                </select>
-              </label>
             </div>
 
             {fieldError("projectType")}
-
-            <label>
-              Desired start date
-              <input
-                type="date"
-                name="startDate"
-                value={values.startDate}
-                onChange={update}
-              />
-            </label>
 
             <label>
               Project description

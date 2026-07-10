@@ -86,7 +86,13 @@ export default function Portfolio() {
 
   const onPointerDown = (event) => {
     const track = trackRef.current;
-    if (!track || event.button !== 0) return;
+    if (
+      !track ||
+      event.button !== 0 ||
+      event.pointerType === "touch"
+    ) {
+      return;
+    }
 
     dragRef.current = {
       active: true,
@@ -100,7 +106,13 @@ export default function Portfolio() {
   const onPointerMove = (event) => {
     const track = trackRef.current;
     const drag = dragRef.current;
-    if (!track || !drag.active) return;
+    if (
+      !track ||
+      !drag.active ||
+      event.pointerType === "touch"
+    ) {
+      return;
+    }
 
     const delta = event.clientX - drag.startX;
     track.scrollLeft = drag.scrollLeft - delta;

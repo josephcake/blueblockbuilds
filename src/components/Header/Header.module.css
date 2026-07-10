@@ -98,3 +98,29 @@
     text-align: center;
   }
 }
+
+@media (max-width: 460px) {
+  .header {
+    padding: 0 0.75rem;
+  }
+
+  .wordmark {
+    gap: 0.55rem;
+  }
+
+  .wordmark span {
+    width: 32px;
+    height: 32px;
+    font-size: 0.72rem;
+  }
+
+  .wordmark strong {
+    max-width: 9rem;
+    font-size: 0.78rem;
+    line-height: 1.05;
+  }
+
+  .menuButton {
+    padding: 0.58rem 0.72rem;
+  }
+}

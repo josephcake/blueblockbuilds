@@ -369,25 +369,193 @@
 
 @media (max-width: 760px) {
   .section {
-    padding: 5rem 0;
+    padding: 4.5rem 0;
   }
 
-  .shell,
-  .education {
+  .wideShell {
+    width: min(100% - 1rem, 1720px);
+  }
+
+  .intro {
+    margin-bottom: 1.75rem;
+  }
+
+  .shell {
     grid-template-columns: 1fr;
+    min-height: 0;
+    border-radius: 6px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
   }
 
   .stage {
     grid-row: 1;
+    grid-template-rows: auto minmax(360px, auto) auto;
+  }
+
+  .sidebar {
+    grid-row: 2;
+  }
+
+  .education {
+    grid-row: 3;
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar,
+  .education {
+    padding: 1rem;
+  }
+
+  .categoryNav {
+    display: flex;
+    gap: 0.45rem;
+    margin: -0.1rem -1rem 1.1rem;
+    padding: 0 1rem 0.35rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .categoryNav::-webkit-scrollbar,
+  .segmented::-webkit-scrollbar {
+    display: none;
+  }
+
+  .categoryNav button {
+    flex: 0 0 auto;
+    min-height: 42px;
+    min-width: 118px;
+    text-align: center;
+  }
+
+  .copy {
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+  }
+
+  .copy h3,
+  .education h3 {
+    font-size: clamp(1.45rem, 9vw, 2.15rem);
+    line-height: 1;
+  }
+
+  .segmented {
+    margin-right: -1rem;
+    padding-right: 1rem;
+  }
+
+  .segmented button {
+    max-width: 190px;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.15;
+  }
+
+  .modeGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .modeGrid button {
+    min-height: 42px;
+    padding: 0.45rem 0.35rem;
+    font-size: 0.68rem;
+    line-height: 1.1;
+  }
+
+  .toggles {
+    grid-template-columns: 1fr;
+    padding: 0.85rem 0;
+  }
+
+  .detailPanel {
+    padding: 0.9rem;
+  }
+
+  .detailPanel strong {
+    font-size: 1.25rem;
+  }
+
+  .detailPanel ul {
+    gap: 0.32rem;
   }
 
   .viewer,
   .viewerFallback {
-    min-height: 470px;
+    min-height: min(68vh, 520px);
   }
 
-  .toolbar,
+  .toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 0.75rem;
+  }
+
+  .toolbar div {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar button,
+  .toolbar select,
+  .controlGroup select {
+    width: 100%;
+    min-height: 44px;
+  }
+
   .compareTray {
     grid-template-columns: 1fr;
+  }
+
+  .compareTray div {
+    min-height: 58px;
+    padding: 0.72rem 0.85rem;
+  }
+
+  .education {
+    gap: 1rem;
+  }
+
+  .education dl {
+    gap: 0.85rem;
+  }
+
+  .attributeGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 460px) {
+  .wideShell {
+    width: calc(100% - 0.75rem);
+  }
+
+  .stage {
+    grid-template-rows: auto minmax(320px, auto) auto;
+  }
+
+  .viewer,
+  .viewerFallback {
+    min-height: 390px;
+  }
+
+  .modeGrid,
+  .attributeGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .controlLabel,
+  .rangeLabel,
+  .compareTray span,
+  .attributeGrid span {
+    font-size: 0.66rem;
+  }
+
+  .toggles label {
+    font-size: 0.84rem;
+  }
+
+  .categoryNav button {
+    min-width: 104px;
+    font-size: 0.68rem;
   }
 }
