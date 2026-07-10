@@ -17,4 +17,18 @@ describe("ProjectGallery", () => {
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
+
+  it("moves between project images with left and right arrow keys", async () => {
+    const user = userEvent.setup();
+    render(<ProjectGallery />);
+
+    await user.click(screen.getAllByRole("button", { name: /view project/i })[0]);
+    const dialog = screen.getByRole("dialog");
+
+    expect(within(dialog).getByAltText("Modern Kitchen Renovation main finished project view")).toBeInTheDocument();
+    await user.keyboard("{ArrowRight}");
+    expect(within(dialog).getByAltText("Kitchen renovation cabinetry and countertop view")).toBeInTheDocument();
+    await user.keyboard("{ArrowLeft}");
+    expect(within(dialog).getByAltText("Modern Kitchen Renovation main finished project view")).toBeInTheDocument();
+  });
 });
