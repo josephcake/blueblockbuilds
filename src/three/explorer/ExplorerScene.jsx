@@ -193,21 +193,23 @@ function ModelFrame({ children, label, offset = 0, compare = false }) {
   );
 }
 
-function CabinetDoorSkin({ euro, x = 0.5 }) {
+function CabinetDoorSkin({ euro, x = 0.5, height = 1.34 }) {
   const trimMaterial = getMaterial(euro ? mat("metal") : materialOptions("oak"));
+  const railY = height / 2 - 0.08;
+  const stileHeight = height - 0.18;
   return (
     <group>
       {euro ? (
         <>
-          <ThinLine position={[x, 0.56, 0.052]} args={[0.7, 0.022, 0.018]} material={trimMaterial} />
-          <ThinLine position={[x, -0.56, 0.052]} args={[0.7, 0.012, 0.014]} material={getMaterial(mat("charcoal"))} />
+          <ThinLine position={[x, railY, 0.052]} args={[0.7, 0.022, 0.018]} material={trimMaterial} />
+          <ThinLine position={[x, -railY, 0.052]} args={[0.7, 0.012, 0.014]} material={getMaterial(mat("charcoal"))} />
         </>
       ) : (
         <>
-          <ThinLine position={[x, 0.58, 0.052]} args={[0.82, 0.05, 0.018]} material={trimMaterial} />
-          <ThinLine position={[x, -0.58, 0.052]} args={[0.82, 0.05, 0.018]} material={trimMaterial} />
-          <ThinLine position={[x - 0.37, 0, 0.052]} args={[0.052, 1.16, 0.018]} material={trimMaterial} />
-          <ThinLine position={[x + 0.37, 0, 0.052]} args={[0.052, 1.16, 0.018]} material={trimMaterial} />
+          <ThinLine position={[x, railY, 0.052]} args={[0.82, 0.05, 0.018]} material={trimMaterial} />
+          <ThinLine position={[x, -railY, 0.052]} args={[0.82, 0.05, 0.018]} material={trimMaterial} />
+          <ThinLine position={[x - 0.37, 0, 0.052]} args={[0.052, stileHeight, 0.018]} material={trimMaterial} />
+          <ThinLine position={[x + 0.37, 0, 0.052]} args={[0.052, stileHeight, 0.018]} material={trimMaterial} />
           <ThinLine position={[x, 0, 0.056]} args={[0.54, 0.02, 0.014]} material={getMaterial({ ...mat("charcoal"), transparent: true, opacity: 0.28, cacheKey: "shadow-reveal" })} />
         </>
       )}
@@ -215,88 +217,206 @@ function CabinetDoorSkin({ euro, x = 0.5 }) {
   );
 }
 
-function CabinetSystem({ variant, mode, motion, annotations }) {
-  const isEuro = variant.id === "european";
-  const open = mode.includes("Open doors") ? motion : mode.includes("Cutaway") || mode.includes("Exploded") ? 0.82 : 0;
-  const drawers = mode.includes("Open drawers") ? motion : mode.includes("Exploded") ? 0.72 : 0;
+function CabinetCarcass({ framed = false, cutaway = false, explode = 0 }) {
+  const panelMaterial = getMaterial(cutaway ? { ...mat("navy"), transparent: true, opacity: 0.54, cacheKey: "cabinet-cutaway-navy" } : mat("navy"));
+  return (
+    <group>
+      <mesh position={[0, 0.44, -0.52 - explode * 0.08]} material={getMaterial(mat("charcoal"))} receiveShadow>
+        <boxGeometry args={[2.04, 1.5, 0.045]} />
+      </mesh>
+      <mesh position={[-1.12 - explode * 0.1, 0.43, -0.08]} material={panelMaterial} castShadow>
+        <boxGeometry args={[0.07, 1.62, 0.9]} />
+      </mesh>
+      <mesh position={[1.12 + explode * 0.1, 0.43, -0.08]} material={panelMaterial} castShadow>
+        <boxGeometry args={[0.07, 1.62, 0.9]} />
+      </mesh>
+      <mesh position={[0, 1.24 + explode * 0.12, -0.08]} material={getMaterial(mat("navy"))} castShadow>
+        <boxGeometry args={[2.18, 0.075, 0.9]} />
+      </mesh>
+      <mesh position={[0, -0.35 - explode * 0.08, -0.08]} material={getMaterial(mat("navy"))} castShadow>
+        <boxGeometry args={[2.18, 0.075, 0.9]} />
+      </mesh>
+      <mesh position={[0, -0.54, 0.1]} material={getMaterial(mat("charcoal"))} castShadow>
+        <boxGeometry args={[1.78, 0.22, 0.56]} />
+      </mesh>
+      <ThinLine position={[0, -0.37, 0.39]} args={[1.6, 0.018, 0.018]} material={getMaterial(mat("metal"))} />
+      {framed && (
+        <group position={[0, 0.45, 0.42 + explode * 0.1]}>
+          <ThinLine position={[0, 0.77, 0]} args={[2.42, 0.12, 0.08]} material={getMaterial(mat("ivory"))} />
+          <ThinLine position={[0, -0.77, 0]} args={[2.42, 0.12, 0.08]} material={getMaterial(mat("ivory"))} />
+          <ThinLine position={[-1.16, 0, 0]} args={[0.12, 1.62, 0.08]} material={getMaterial(mat("ivory"))} />
+          <ThinLine position={[1.16, 0, 0]} args={[0.12, 1.62, 0.08]} material={getMaterial(mat("ivory"))} />
+          <ThinLine position={[0, 0, 0]} args={[0.1, 1.58, 0.08]} material={getMaterial(mat("ivory"))} />
+        </group>
+      )}
+    </group>
+  );
+}
+
+function CabinetHingeDetail({ side = -1, y = 0, open = 0, explode = 0 }) {
+  const x = side * 1.03;
+  return (
+    <group position={[x + side * explode * 0.08, y, 0.45]}>
+      <mesh rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))} castShadow>
+        <cylinderGeometry args={[0.055, 0.055, 0.17, 24]} />
+      </mesh>
+      <mesh position={[side * 0.045, 0, 0.055]} material={getMaterial(mat("metal"))} castShadow>
+        <boxGeometry args={[0.12, 0.18, 0.035]} />
+      </mesh>
+      <mesh position={[side * (0.14 + open * 0.05), 0, 0.11]} rotation={[0, side * open * 0.6, 0]} material={getMaterial(mat("metal"))} castShadow>
+        <boxGeometry args={[0.18, 0.045, 0.035]} />
+      </mesh>
+      <Screw position={[side * 0.06, 0.055, 0.08]} scale={0.32} />
+      <Screw position={[side * 0.06, -0.055, 0.08]} scale={0.32} />
+    </group>
+  );
+}
+
+function ShelfObjects() {
+  return (
+    <group>
+      {[-0.46, -0.38, -0.3, -0.22].map((x, index) => (
+        <mesh key={x} position={[x, 0.24 + index * 0.018, 0.02]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(index % 2 ? mat("ivory") : mat("stone"))} castShadow>
+          <cylinderGeometry args={[0.16, 0.16, 0.018, 36]} />
+        </mesh>
+      ))}
+      <mesh position={[0.42, 0.3, 0.01]} material={getMaterial(mat("ivory"))} castShadow>
+        <cylinderGeometry args={[0.14, 0.1, 0.18, 28]} />
+      </mesh>
+      <mesh position={[0.42, 0.43, 0.01]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("charcoal"))}>
+        <torusGeometry args={[0.1, 0.012, 10, 28]} />
+      </mesh>
+      <RoundedBox args={[0.34, 0.34, 0.28]} radius={0.025} smoothness={4} position={[0.03, 0.86, -0.02]} material={getMaterial(mat("stone"))} castShadow />
+      <RoundedBox args={[0.26, 0.42, 0.22]} radius={0.02} smoothness={4} position={[0.46, 0.9, -0.04]} material={getMaterial(mat("oak"))} castShadow />
+      <mesh position={[-0.5, 0.88, -0.03]} rotation={[0, 0, Math.PI / 2]} material={getMaterial(mat("metal"))} castShadow>
+        <cylinderGeometry args={[0.055, 0.055, 0.52, 18]} />
+      </mesh>
+    </group>
+  );
+}
+
+function DrawerObjects({ tier }) {
+  if (tier === 0) {
+    return (
+      <group>
+        {[-0.42, -0.18, 0.08, 0.34].map((x, index) => (
+          <mesh key={x} position={[x, 0.06, -0.12 + index * 0.02]} rotation={[0, 0, Math.PI / 2]} material={getMaterial(mat("metal"))} castShadow>
+            <cylinderGeometry args={[0.018, 0.018, 0.42, 12]} />
+          </mesh>
+        ))}
+        <RoundedBox args={[0.22, 0.055, 0.38]} radius={0.02} smoothness={4} position={[0.6, 0.04, -0.08]} material={getMaterial(mat("charcoal"))} />
+      </group>
+    );
+  }
+  if (tier === 1) {
+    return (
+      <group>
+        {[-0.42, -0.12, 0.2].map((x) => (
+          <mesh key={x} position={[x, 0.08, -0.08]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("ivory"))} castShadow>
+            <cylinderGeometry args={[0.1, 0.1, 0.14, 24]} />
+          </mesh>
+        ))}
+        <RoundedBox args={[0.32, 0.12, 0.28]} radius={0.02} smoothness={4} position={[0.5, 0.05, -0.04]} material={getMaterial(mat("stone"))} />
+      </group>
+    );
+  }
+  return (
+    <group>
+      {[-0.38, 0.02, 0.42].map((x, index) => (
+        <mesh key={x} position={[x, 0.08, -0.08]} rotation={[0, 0, Math.PI / 2]} material={getMaterial(index === 1 ? mat("oak") : mat("ivory"))} castShadow>
+          <cylinderGeometry args={[0.09, 0.09, 0.38, 20]} />
+        </mesh>
+      ))}
+      <RoundedBox args={[0.28, 0.16, 0.34]} radius={0.025} smoothness={4} position={[0.68, 0.05, -0.04]} material={getMaterial(mat("walnut"))} />
+    </group>
+  );
+}
+
+function DoorCabinet({ variant, mode, motion, annotations }) {
+  const isEuro = variant.id === "european-door";
+  const framed = variant.id === "american-door";
+  const open = mode.includes("Open") ? motion : mode.includes("Cutaway") || mode.includes("Exploded") ? 0.82 : 0;
   const explode = mode.includes("Exploded") ? 1 : 0;
   const cutaway = mode.includes("Cutaway");
   const doorMaterial = getMaterial(isEuro ? mat("ivory") : materialOptions("walnut"));
 
   return (
     <group>
-      <RoundedBox args={[2.25, 1.65, 0.82]} radius={0.025} smoothness={4} position={[0, 0.45, -0.08]} material={getMaterial(mat("navy"))} castShadow receiveShadow />
-      <mesh position={[0, 0.48, -0.52]} material={getMaterial(mat("charcoal"))} receiveShadow>
-        <boxGeometry args={[2.04, 1.36, 0.04]} />
-      </mesh>
-      <mesh position={[-1.16, 0.43, -0.08]} material={getMaterial(mat("navy"))} castShadow>
-        <boxGeometry args={[0.055, 1.58, 0.86]} />
-      </mesh>
-      <mesh position={[1.16, 0.43, -0.08]} material={getMaterial(mat("navy"))} castShadow>
-        <boxGeometry args={[0.055, 1.58, 0.86]} />
-      </mesh>
-      {[0.14, 0.46, 0.78].map((y) => (
-        <group key={y}>
-          <Screw position={[-1.08, y, 0.34]} scale={0.42} />
-          <Screw position={[1.08, y, 0.34]} scale={0.42} />
-        </group>
-      ))}
-      {!isEuro && (
-        <group position={[0, 0.45, 0.36 + explode * 0.24]}>
-          <mesh material={getMaterial(mat("ivory"))} castShadow><boxGeometry args={[2.42, 0.12, 0.08]} /></mesh>
-          <mesh position={[0, 0.76, 0]} material={getMaterial(mat("ivory"))} castShadow><boxGeometry args={[2.42, 0.12, 0.08]} /></mesh>
-          <mesh position={[-1.15, 0.38, 0]} material={getMaterial(mat("ivory"))} castShadow><boxGeometry args={[0.12, 1.64, 0.08]} /></mesh>
-          <mesh position={[1.15, 0.38, 0]} material={getMaterial(mat("ivory"))} castShadow><boxGeometry args={[0.12, 1.64, 0.08]} /></mesh>
-          <mesh position={[0, 0.38, 0]} material={getMaterial(mat("ivory"))} castShadow><boxGeometry args={[0.1, 1.64, 0.08]} /></mesh>
-        </group>
-      )}
-      <group position={[-1.08 - explode * 0.28, 0.55, 0.42 + explode * 0.24]} rotation={[0, -open * 1.25, 0]}>
-        <RoundedBox position={[0.5, 0, 0]} args={[0.96, 1.42, 0.07]} radius={isEuro ? 0.018 : 0.035} smoothness={5} material={doorMaterial} castShadow />
-        <CabinetDoorSkin euro={isEuro} x={0.5} />
-        <mesh position={[0.5, 0, -0.065]} material={getMaterial(mat("stone"))}>
-          <boxGeometry args={[0.78, 1.18, 0.018]} />
+      <CabinetCarcass framed={framed} cutaway={cutaway} explode={explode} />
+      {[0.18, 0.64].map((y) => (
+        <mesh key={y} position={[0, y, cutaway ? 0.12 : -0.02]} material={getMaterial(mat("stone"))} castShadow>
+          <boxGeometry args={[1.84, 0.038, 0.68]} />
         </mesh>
+      ))}
+      <ShelfObjects />
+      <group position={[-1.08 - explode * 0.26, 0.47, 0.46 + explode * 0.16]} rotation={[0, -open * 1.32, 0]}>
+        <RoundedBox position={[0.5, 0, 0]} args={[0.96, 1.44, 0.074]} radius={isEuro ? 0.016 : 0.035} smoothness={5} material={doorMaterial} castShadow />
+        <CabinetDoorSkin euro={isEuro} x={0.5} height={1.44} />
+        <mesh position={[0.82, 0, 0.06]} material={getMaterial(mat("metal"))} castShadow><boxGeometry args={[0.035, 0.72, 0.035]} /></mesh>
+        <mesh position={[0.5, 0, -0.065]} material={getMaterial(mat("stone"))}><boxGeometry args={[0.76, 1.16, 0.018]} /></mesh>
       </group>
-      <group position={[1.08 + explode * 0.28, 0.55, 0.42 + explode * 0.24]} rotation={[0, open * 1.25, 0]}>
-        <RoundedBox position={[-0.5, 0, 0]} args={[0.96, 1.42, 0.07]} radius={isEuro ? 0.018 : 0.035} smoothness={5} material={doorMaterial} castShadow />
-        <CabinetDoorSkin euro={isEuro} x={-0.5} />
-        <mesh position={[-0.5, 0, -0.065]} material={getMaterial(mat("stone"))}>
-          <boxGeometry args={[0.78, 1.18, 0.018]} />
-        </mesh>
+      <group position={[1.08 + explode * 0.26, 0.47, 0.46 + explode * 0.16]} rotation={[0, open * 1.32, 0]}>
+        <RoundedBox position={[-0.5, 0, 0]} args={[0.96, 1.44, 0.074]} radius={isEuro ? 0.016 : 0.035} smoothness={5} material={doorMaterial} castShadow />
+        <CabinetDoorSkin euro={isEuro} x={-0.5} height={1.44} />
+        <mesh position={[-0.82, 0, 0.06]} material={getMaterial(mat("metal"))} castShadow><boxGeometry args={[0.035, 0.72, 0.035]} /></mesh>
+        <mesh position={[-0.5, 0, -0.065]} material={getMaterial(mat("stone"))}><boxGeometry args={[0.76, 1.16, 0.018]} /></mesh>
       </group>
-      {[0.1, -0.28].map((y, index) => (
-        <group key={y} position={[0, y + 0.74, 0.58 + drawers * (0.38 + index * 0.18) + explode * 0.4]}>
-          <RoundedBox args={[1.72, 0.26, 0.52]} radius={0.022} smoothness={4} material={doorMaterial} castShadow />
-          <mesh position={[0, -0.03, -0.02]} material={getMaterial(mat("stone"))}>
-            <boxGeometry args={[1.48, 0.16, 0.42]} />
-          </mesh>
-          <ThinLine position={[-0.78, -0.02, 0.04]} args={[0.035, 0.18, 0.48]} material={getMaterial(mat("charcoal"))} />
-          <ThinLine position={[0.78, -0.02, 0.04]} args={[0.035, 0.18, 0.48]} material={getMaterial(mat("charcoal"))} />
-          <mesh position={[0, 0, 0.29]} material={getMaterial(mat("metal"))}><boxGeometry args={[0.86, 0.035, 0.035]} /></mesh>
-        </group>
-      ))}
-      {[-0.44, 0.06, 0.56].map((y) => (
-        <mesh key={y} position={[0, y + 0.42, cutaway ? 0.15 : 0.02]} material={getMaterial(mat("stone"))} castShadow>
-          <boxGeometry args={[1.88, 0.035, 0.66]} />
-        </mesh>
-      ))}
-      <mesh position={[0, -0.46, 0.12]} material={getMaterial(mat("charcoal"))}><boxGeometry args={[1.78, 0.22, 0.54]} /></mesh>
-      <ThinLine position={[0, -0.33, 0.43]} args={[1.58, 0.018, 0.018]} material={getMaterial(mat("metal"))} />
-      {[-1.22, 1.22].map((x) => (
-        <group key={x}>
-          <mesh position={[x, 0.92, 0.46]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}>
-            <cylinderGeometry args={[0.035, 0.035, 0.16, 20]} />
-          </mesh>
-          <mesh position={[x, 0.25, 0.46]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}>
-            <cylinderGeometry args={[0.035, 0.035, 0.16, 20]} />
-          </mesh>
-        </group>
-      ))}
-      <Annotation visible={annotations} position={[0, 1.6, 0.62]}>{isEuro ? "frameless box" : "visible face frame"}</Annotation>
-      <Annotation visible={annotations} position={[1.45, 0.8, 0.75]}>hinge line</Annotation>
-      <Annotation visible={annotations} position={[0, -0.64, 0.4]}>toe kick</Annotation>
+      {[-1, 1].map((side) => [0.88, 0.48, 0.08].map((y) => <CabinetHingeDetail key={`${side}-${y}`} side={side} y={y} open={open} explode={explode} />))}
+      <Annotation visible={annotations} position={[0, 1.55, 0.62]}>{isEuro ? "frameless slab doors" : "framed overlay doors"}</Annotation>
+      <Annotation visible={annotations} position={[1.34, 0.74, 0.72]}>concealed hinges</Annotation>
+      <Annotation visible={annotations} position={[0, -0.68, 0.36]}>toe kick</Annotation>
     </group>
   );
+}
+
+function DrawerCabinet({ mode, motion, annotations }) {
+  const open = mode.includes("Open") ? motion : mode.includes("Cutaway") || mode.includes("Exploded") ? 0.84 : 0;
+  const explode = mode.includes("Exploded") ? 1 : 0;
+  const cutaway = mode.includes("Cutaway");
+  const frontMaterial = getMaterial(materialOptions("walnut"));
+
+  return (
+    <group>
+      <CabinetCarcass cutaway={cutaway} explode={explode} />
+      {[0.88, 0.43, -0.02].map((y, index) => {
+        const drawerDepth = open * (0.5 + index * 0.08) + explode * 0.2;
+        const showContents = mode.includes("Open") || mode.includes("Cutaway") || mode.includes("Exploded");
+        return (
+          <group key={y} position={[0, y, 0.34 + drawerDepth]}>
+            <RoundedBox args={[1.88, 0.36, 0.08]} radius={0.025} smoothness={4} material={frontMaterial} castShadow />
+            <CabinetDoorSkin euro={false} x={0} height={0.34} />
+            <mesh position={[0, 0.01, -0.32]} material={getMaterial(mat("stone"))} castShadow>
+              <boxGeometry args={[1.62, 0.08, 0.58]} />
+            </mesh>
+            <mesh position={[-0.82, 0.01, -0.32]} material={getMaterial(materialOptions("oak"))} castShadow><boxGeometry args={[0.055, 0.28, 0.62]} /></mesh>
+            <mesh position={[0.82, 0.01, -0.32]} material={getMaterial(materialOptions("oak"))} castShadow><boxGeometry args={[0.055, 0.28, 0.62]} /></mesh>
+            <mesh position={[0, -0.13, -0.32]} material={getMaterial(materialOptions("oak"))} castShadow><boxGeometry args={[1.62, 0.045, 0.62]} /></mesh>
+            <mesh position={[0, 0.02, 0.08]} material={getMaterial(mat("metal"))} castShadow><boxGeometry args={[0.86, 0.035, 0.035]} /></mesh>
+            {showContents && <DrawerObjects tier={index} />}
+          </group>
+        );
+      })}
+      {[0.88, 0.43, -0.02].map((y) => (
+        <group key={y}>
+          <ThinLine position={[-1.02, y, 0.12]} args={[0.035, 0.045, 0.66]} material={getMaterial(mat("metal"))} />
+          <ThinLine position={[1.02, y, 0.12]} args={[0.035, 0.045, 0.66]} material={getMaterial(mat("metal"))} />
+          <Screw position={[-1.04, y + 0.08, 0.44]} scale={0.3} />
+          <Screw position={[1.04, y + 0.08, 0.44]} scale={0.3} />
+        </group>
+      ))}
+      <Annotation visible={annotations} position={[0, 1.52, 0.58]}>separate drawer stack</Annotation>
+      <Annotation visible={annotations} position={[1.36, 0.48, 0.5]}>slide rails</Annotation>
+      <Annotation visible={annotations && open > 0.1} position={[0.18, 0.1, 1.18]}>organized drawer contents</Annotation>
+    </group>
+  );
+}
+
+function CabinetSystem({ variant, mode, motion, annotations }) {
+  if (variant.id === "drawer-base") {
+    return <DrawerCabinet mode={mode} motion={motion} annotations={annotations} />;
+  }
+
+  return <DoorCabinet variant={variant} mode={mode} motion={motion} annotations={annotations} />;
 }
 
 function HingeSystem({ variant, mode, motion, annotations }) {

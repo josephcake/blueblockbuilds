@@ -3,30 +3,37 @@ export const explorerCategories = [
     id: "cabinets",
     label: "Cabinets",
     title: "Cabinet Construction Explorer",
-    description: "Compare framed American construction with frameless European cabinet systems, including access, reveals, toe kicks, drawers, shelves, and door behavior.",
-    defaultVariant: "american",
-    compareDefault: "european",
+    description: "Compare door cabinet construction and drawer base storage as separate cabinet styles, with realistic hinge, reveal, shelf, drawer-box, and opening behavior.",
+    defaultVariant: "american-door",
+    compareDefault: "european-door",
     variants: [
       {
-        id: "american",
-        name: "American Framed",
-        cue: "Visible face frame, traditional overlay language",
-        features: ["Face frame construction", "Overlay doors", "Visible rails and stiles", "Transitional profile"],
-        attributes: { Construction: "Framed", Reveal: "Wider", Access: "Frame-restricted", Style: "Traditional / transitional" }
+        id: "american-door",
+        name: "American Door Cabinet",
+        cue: "Framed cabinet box with two hinged overlay doors",
+        features: ["Visible face frame", "Swinging overlay doors", "Detailed concealed hinges", "Adjustable shelf interior"],
+        attributes: { Style: "Door cabinet", Construction: "Framed", Opening: "Hinged doors", Interior: "Shelves" }
       },
       {
-        id: "european",
-        name: "European Frameless",
-        cue: "Clean slab fronts with tight modern reveals",
-        features: ["Frameless box", "Full interior access", "Tight reveals", "Handleless slab fronts"],
-        attributes: { Construction: "Frameless", Reveal: "Tight", Access: "Open interior", Style: "Modern / architectural" }
+        id: "european-door",
+        name: "European Door Cabinet",
+        cue: "Frameless cabinet box with slab doors and tight reveals",
+        features: ["Frameless box", "Swinging slab doors", "Tight modern reveals", "Full-width interior access"],
+        attributes: { Style: "Door cabinet", Construction: "Frameless", Opening: "Hinged doors", Interior: "Shelves" }
+      },
+      {
+        id: "drawer-base",
+        name: "Drawer Base Cabinet",
+        cue: "Stacked drawer storage with sliding drawer boxes and filled interiors",
+        features: ["Separate drawer fronts", "Wood drawer boxes", "Side-mounted slide rails", "Visible stored items when open"],
+        attributes: { Style: "Drawer cabinet", Construction: "Drawer stack", Opening: "Sliding drawers", Interior: "Drawer boxes" }
       }
     ],
-    modes: ["Closed", "Open doors", "Open drawers", "Cutaway", "Exploded"],
+    modes: ["Closed", "Open", "Cutaway", "Exploded"],
     detail: {
-      what: "A cabinet system controls storage, sightlines, hardware, and how the kitchen feels in daily use.",
-      best: "Use framed construction for a warmer transitional language; use frameless construction for precise modern interiors.",
-      considerations: "Door gaps, hinge type, overlay, shelf access, and toe-kick detail all change the final feel."
+      what: "Cabinet quality is visible in the box, door or drawer front, reveal spacing, hinge detail, interior access, and how naturally the storage opens.",
+      best: "Use door cabinets for shelf storage and larger items; use drawer bases for daily-access tools, utensils, towels, and organized kitchen objects.",
+      considerations: "Door swing, drawer slide depth, hinge type, reveal precision, face-frame style, and toe-kick detail should be selected together."
     }
   },
   {
