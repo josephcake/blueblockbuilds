@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/contact",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/contact.js:onRequest"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}
