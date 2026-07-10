@@ -1,7 +1,5 @@
 import { Environment, Html, RoundedBox, ContactShadows } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useMemo } from "react";
-import { MeshPhysicalMaterial, MeshStandardMaterial, Vector3 } from "three";
+import { MeshPhysicalMaterial, MeshStandardMaterial } from "three";
 
 const materialLibrary = {
   navy: { color: "#0b1a2e", roughness: 0.5, metalness: 0.04 },
@@ -56,25 +54,6 @@ function Annotation({ children, position, visible = true }) {
       </span>
     </Html>
   );
-}
-
-function CameraDirector({ preset }) {
-  const { camera } = useThree();
-  const target = useMemo(() => new Vector3(0, 0.25, 0), []);
-  const positions = {
-    front: new Vector3(0, 1.15, 6.1),
-    "three-quarter": new Vector3(3.9, 2.05, 5.2),
-    top: new Vector3(0.2, 6.8, 1.2),
-    detail: new Vector3(1.7, 1.1, 3.45)
-  };
-
-  useFrame(() => {
-    const next = positions[preset] || positions["three-quarter"];
-    camera.position.lerp(next, 0.045);
-    camera.lookAt(target);
-  });
-
-  return null;
 }
 
 function SceneLighting({ preset }) {
@@ -381,11 +360,10 @@ function CategoryModel(props) {
   return <Model {...props} />;
 }
 
-export default function ExplorerScene({ category, variant, compareVariant, compare, mode, annotations, powered, motion, lightPreset, cameraPreset }) {
+export default function ExplorerScene({ category, variant, compareVariant, compare, mode, annotations, powered, motion, lightPreset }) {
   return (
     <>
       <SceneLighting preset={lightPreset} />
-      <CameraDirector preset={cameraPreset} />
       <group position={[0, -0.15, 0]} rotation={[0, compare ? 0 : -0.18, 0]}>
         <ModelFrame label={variant.name} offset={compare ? -1.55 : 0} compare={compare}>
           <CategoryModel category={category} variant={variant} mode={mode} annotations={annotations} powered={powered} motion={motion} />

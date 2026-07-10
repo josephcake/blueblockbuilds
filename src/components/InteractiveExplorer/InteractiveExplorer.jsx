@@ -24,6 +24,7 @@ export default function InteractiveExplorer() {
   const [motion, setMotion] = useState(64);
   const [lightPreset, setLightPreset] = useState(lightPresets[0]);
   const [cameraPreset, setCameraPreset] = useState(cameraPresets[1]);
+  const [cameraReset, setCameraReset] = useState(0);
   const reducedMotion = useReducedMotion();
 
   const variant = getVariant(category, variantByCategory[category.id]);
@@ -35,9 +36,14 @@ export default function InteractiveExplorer() {
     setCompare(false);
   };
 
+  const applyCameraPreset = (preset) => {
+    setCameraPreset(preset);
+    setCameraReset((current) => current + 1);
+  };
+
   return (
     <section id="explorer" className={`${styles.section} surface-band`}>
-      <div className="section-shell">
+      <div className={styles.wideShell}>
         <div className={styles.intro}>
           <SectionHeading
             eyebrow="3D product explorer"
@@ -146,10 +152,13 @@ export default function InteractiveExplorer() {
             <div className={styles.toolbar} aria-label="Viewer presets">
               <div>
                 {cameraPresets.map((item) => (
-                  <button key={item} className={cameraPreset === item ? styles.activeTool : ""} type="button" onClick={() => setCameraPreset(item)}>
+                  <button key={item} className={cameraPreset === item ? styles.activeTool : ""} type="button" onClick={() => applyCameraPreset(item)}>
                     {item}
                   </button>
                 ))}
+                <button type="button" onClick={() => applyCameraPreset(cameraPreset)}>
+                  Reset view
+                </button>
               </div>
               <select value={lightPreset} onChange={(event) => setLightPreset(event.target.value)} aria-label="Lighting preset">
                 {lightPresets.map((item) => <option key={item}>{item}</option>)}
@@ -168,6 +177,7 @@ export default function InteractiveExplorer() {
                 motion={motion / 100}
                 lightPreset={lightPreset}
                 cameraPreset={cameraPreset}
+                cameraReset={cameraReset}
                 reducedMotion={reducedMotion}
               />
             </Suspense>

@@ -1,25 +1,35 @@
 .section {
-  padding: 7rem 0;
+  padding: 7rem 0 8rem;
+  overflow: clip;
+}
+
+.wideShell {
+  width: min(1720px, calc(100% - 2rem));
+  margin: 0 auto;
 }
 
 .intro {
-  max-width: 860px;
+  max-width: 1080px;
   margin-bottom: 3rem;
 }
 
 .shell {
   display: grid;
-  grid-template-columns: minmax(250px, 0.78fr) minmax(0, 1.5fr) minmax(230px, 0.62fr);
+  grid-template-columns: minmax(280px, 0.6fr) minmax(0, 2.25fr) minmax(280px, 0.68fr);
   gap: 1px;
-  min-height: 780px;
-  background: var(--color-line);
-  border: 1px solid var(--color-line);
+  min-height: 860px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.42);
 }
 
 .sidebar,
 .stage,
 .education {
-  background: rgba(5, 8, 13, 0.84);
+  background: rgba(4, 7, 11, 0.88);
+  backdrop-filter: blur(22px);
 }
 
 .sidebar,
@@ -29,8 +39,8 @@
 
 .categoryNav {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.45rem;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
   margin-bottom: 1.6rem;
 }
 
@@ -41,16 +51,17 @@
 .toolbar select,
 .controlGroup select {
   border: 1px solid var(--color-line);
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(255, 255, 255, 0.035);
   color: var(--color-white);
-  transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out), color 180ms var(--ease-out);
+  border-radius: 6px;
+  transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out), color 180ms var(--ease-out), transform 180ms var(--ease-out);
 }
 
 .categoryNav button {
-  min-height: 52px;
-  padding: 0.75rem;
+  min-height: 44px;
+  padding: 0.68rem 0.75rem;
   text-align: left;
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -61,20 +72,21 @@
 .modeGrid button:hover,
 .toolbar button:hover {
   border-color: rgba(216, 210, 200, 0.5);
+  background: rgba(255, 255, 255, 0.075);
 }
 
 .activeCategory,
 .activeSegment,
 .activeMode,
 .activeTool {
-  background: rgba(216, 210, 200, 0.16) !important;
+  background: rgba(216, 210, 200, 0.13) !important;
   border-color: rgba(216, 210, 200, 0.68) !important;
   color: var(--color-stone) !important;
 }
 
 .copy {
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
   padding: 1.4rem 0;
   margin-bottom: 1.35rem;
 }
@@ -121,7 +133,7 @@
 
 .segmented button {
   flex: 0 0 auto;
-  padding: 0.55rem 0.7rem;
+  padding: 0.58rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 800;
 }
@@ -143,8 +155,8 @@
   display: grid;
   gap: 0.65rem;
   padding: 1rem 0;
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
   margin-bottom: 1.1rem;
 }
 
@@ -160,6 +172,7 @@
 .toolbar select {
   min-height: 40px;
   padding: 0 0.7rem;
+  color-scheme: dark;
 }
 
 .rangeLabel {
@@ -175,8 +188,9 @@
 
 .detailPanel {
   padding: 1rem;
-  border: 1px solid var(--color-line);
-  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(216, 210, 200, 0.18);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(216, 210, 200, 0.075), rgba(255, 255, 255, 0.026));
 }
 
 .detailPanel strong {
@@ -216,15 +230,16 @@
   position: relative;
   min-width: 0;
   display: grid;
-  grid-template-rows: auto minmax(420px, 1fr) auto;
+  grid-template-rows: auto minmax(620px, 1fr) auto;
 }
 
 .toolbar {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem;
-  border-bottom: 1px solid var(--color-line);
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .toolbar div {
@@ -243,10 +258,11 @@
 
 .viewer,
 .viewerFallback {
-  min-height: 560px;
+  min-height: 680px;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 16%),
-    radial-gradient(circle at 50% 36%, rgba(216, 210, 200, 0.11), transparent 22rem),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 12%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 28%),
+    radial-gradient(circle at 50% 32%, rgba(216, 210, 200, 0.13), transparent 28rem),
     #060a10;
 }
 
@@ -282,7 +298,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--color-line);
-  border-top: 1px solid var(--color-line);
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 .compareTray div {
@@ -291,7 +307,7 @@
   align-content: center;
   gap: 0.2rem;
   padding: 0.9rem 1rem;
-  background: rgba(5, 8, 13, 0.9);
+  background: rgba(5, 8, 13, 0.86);
 }
 
 .compareTray strong {
@@ -333,7 +349,7 @@
   display: grid;
   gap: 0.2rem;
   padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .attributeGrid strong {
@@ -343,7 +359,7 @@
 
 @media (max-width: 1080px) {
   .shell {
-    grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
+    grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.5fr);
   }
 
   .education {
@@ -368,7 +384,7 @@
 
   .viewer,
   .viewerFallback {
-    min-height: 430px;
+    min-height: 470px;
   }
 
   .toolbar,
