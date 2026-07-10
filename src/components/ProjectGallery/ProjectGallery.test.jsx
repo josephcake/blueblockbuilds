@@ -18,6 +18,16 @@ describe("ProjectGallery", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
+  it("closes the project modal with the close button", async () => {
+    const user = userEvent.setup();
+    render(<ProjectGallery />);
+
+    await user.click(screen.getAllByRole("button", { name: /view project/i })[0]);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Close project details" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
   it("moves between project images with left and right arrow keys", async () => {
     const user = userEvent.setup();
     render(<ProjectGallery />);

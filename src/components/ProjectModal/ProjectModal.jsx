@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useEscapeKey } from "../../hooks/useEscapeKey.js";
 import { useFocusTrap } from "../../hooks/useFocusTrap.js";
 import { useScrollLock } from "../../hooks/useScrollLock.js";
@@ -64,8 +65,14 @@ export default function ProjectModal({ project, projects, onClose, onSelect, ret
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
 
-  return (
-    <div className={styles.backdrop} role="presentation">
+  return createPortal(
+    <div
+      className={styles.backdrop}
+      role="presentation"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
       <section
         className={styles.dialog}
         role="dialog"
@@ -73,7 +80,18 @@ export default function ProjectModal({ project, projects, onClose, onSelect, ret
         aria-labelledby="project-modal-title"
         ref={dialogRef}
       >
-        <button className={styles.close} type="button" onClick={onClose}>Close</button>
+        <button
+          className={styles.close}
+          type="button"
+          onPointerDown={(event) => {
+            event.preventDefault();
+            onClose();
+          }}
+          onClick={onClose}
+          aria-label="Close project details"
+        >
+          Close
+        </button>
         <div className={styles.viewer}>
           {activeImage ? (
             <img className={styles.heroImage} src={activeImage.src} alt={activeImage.alt} />
@@ -121,6 +139,7 @@ export default function ProjectModal({ project, projects, onClose, onSelect, ret
           </div>
         </div>
       </section>
-    </div>
+    </div>,
+    document.body
   );
 }
