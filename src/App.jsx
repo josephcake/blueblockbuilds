@@ -2,10 +2,10 @@ import { Suspense, lazy, useState } from "react";
 import Header from "./components/Header/Header.jsx";
 import Hero from "./components/Hero/Hero.jsx";
 import Expertise from "./components/Expertise/Expertise.jsx";
-import KitchenStory from "./components/KitchenStory/KitchenStory.jsx";
+// import KitchenStory from "./components/KitchenStory/KitchenStory.jsx";
 // import InteractiveStudio from "./components/InteractiveStudio/InteractiveStudio.jsx";
 // import InteractiveExplorer from "./components/InteractiveExplorer/InteractiveExplorer.jsx";
-import BathroomStory from "./components/BathroomStory/BathroomStory.jsx";
+// import BathroomStory from "./components/BathroomStory/BathroomStory.jsx";
 import Process from "./components/Process/Process.jsx";
 import Portfolio from "./components/Portfolio/Portfolio.jsx";
 import About from "./components/About/About.jsx";
@@ -55,10 +55,10 @@ export default function App() {
       <main id="main">
         <Hero />
         <Expertise />
-        <KitchenStory />
+        {/* <KitchenStory /> */}
         {/* <InteractiveStudio /> */}
         {/* <InteractiveExplorer /> */}
-        <BathroomStory />
+        {/* <BathroomStory /> */}
         <Process />
         <Portfolio />
         <About />

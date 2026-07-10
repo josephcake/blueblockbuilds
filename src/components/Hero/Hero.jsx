@@ -12,11 +12,11 @@ export default function Hero() {
           </p>
           <div className={styles.actions}>
             <a href="#contact">Start Your Project</a>
-            <a href="#studio">Explore the Studio</a>
+            {/* <a href="#studio">Explore the Studio</a> */}
           </div>
         </div>
       </div>
-      <div className={styles.nextHint} aria-hidden="true">Expertise</div>
+      {/* <div className={styles.nextHint} aria-hidden="true">Expertise</div> */}
     </section>
   );
 }

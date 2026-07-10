@@ -1,35 +1,30 @@
-import { useState } from "react";
 import { services } from "../../data/services.js";
 import SectionHeading from "../SectionHeading/SectionHeading.jsx";
 import styles from "./Expertise.module.css";
 
 export default function Expertise() {
-  const [active, setActive] = useState(0);
-
   return (
     <section id="expertise" className={`${styles.section} surface-band`}>
       <div className="section-shell">
-        <SectionHeading eyebrow="Expertise" title="Renovation work with a clear point of view." />
+        <div className={styles.header}>
+          <SectionHeading eyebrow="Expertise" title="Focused renovation work, clearly scoped." />
+          <p>
+            Kitchens, bathrooms, cabinetry, and interior upgrades handled with practical planning,
+            clean sequencing, and a finish-first eye.
+          </p>
+        </div>
         <div className={styles.grid}>
-          <div className={styles.list}>
-            {services.map((service, index) => (
-              <button
-                key={service.name}
-                className={`${styles.service} ${active === index ? styles.active : ""}`}
-                type="button"
-                onMouseEnter={() => setActive(index)}
-                onFocus={() => setActive(index)}
-              >
+          <ol className={styles.list}>
+            {services.map((service) => (
+              <li key={service.name} className={styles.service}>
                 <span>{service.number}</span>
-                <strong>{service.name}</strong>
-                <em>{service.description}</em>
-              </button>
+                <div>
+                  <strong>{service.name}</strong>
+                  <em>{service.description}</em>
+                </div>
+              </li>
             ))}
-          </div>
-          <aside className={styles.cue} aria-live="polite">
-            <span>{services[active].cue}</span>
-            <p>{services[active].description}</p>
-          </aside>
+          </ol>
         </div>
       </div>
     </section>

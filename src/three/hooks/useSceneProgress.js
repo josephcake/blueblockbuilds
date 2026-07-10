@@ -13,6 +13,30 @@ function sectionInfluence(id) {
   return clamped * clamped * (3 - 2 * clamped);
 }
 
+function smooth(value) {
+  return value * value * (3 - 2 * value);
+}
+
+function virtualInfluence(centerRatio) {
+  const scrollMax = Math.max(
+    1,
+    document.documentElement.scrollHeight - window.innerHeight
+  );
+  const scrollRatio = window.scrollY / scrollMax;
+  const distance = Math.abs(scrollRatio - centerRatio);
+  const range = 0.18;
+  const raw = 1 - distance / range;
+  const clamped = Math.min(1, Math.max(0, raw));
+  return smooth(clamped);
+}
+
+function progressInfluence(id, fallbackCenterRatio) {
+  const section = document.getElementById(id);
+  return section
+    ? sectionInfluence(id)
+    : virtualInfluence(fallbackCenterRatio);
+}
+
 export function useSceneProgress() {
   const [progress, setProgress] = useState({ hero: 1, kitchen: 0, studio: 0, bathroom: 0, active: "hero" });
 
@@ -21,10 +45,10 @@ export function useSceneProgress() {
     const update = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        const hero = sectionInfluence("top");
-        const kitchen = sectionInfluence("kitchen");
-        const studio = sectionInfluence("studio");
-        const bathroom = sectionInfluence("bathroom");
+        const hero = progressInfluence("top", 0);
+        const kitchen = progressInfluence("kitchen", 0.18);
+        const studio = progressInfluence("studio", 0.34);
+        const bathroom = progressInfluence("bathroom", 0.5);
         const active = [
           ["hero", hero],
           ["kitchen", kitchen],

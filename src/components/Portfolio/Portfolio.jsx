@@ -138,7 +138,7 @@ export default function Portfolio() {
       <div className="section-shell">
         <SectionHeading
           eyebrow="Portfolio"
-          title="Recent work, in motion."
+          title="Our works"
           body="A rolling look at kitchens, bathrooms, and interior renovations across the greater Seattle area."
         />
       </div>
