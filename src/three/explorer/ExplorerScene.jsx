@@ -435,61 +435,6 @@ function CooktopSystem({ variant, mode, powered, annotations }) {
   );
 }
 
-function FlooringSystem({ variant, mode, annotations }) {
-  const cross = mode.includes("Cross") || mode.includes("Exploded");
-  const room = mode.includes("Room");
-  const materialName = variant.id === "hardwood" ? "oak" : variant.id === "engineered" ? "walnut" : variant.id === "vinyl" ? "stone" : "ivory";
-  const layers = variant.id === "hardwood" ? 1 : variant.id === "engineered" ? 4 : 3;
-  const plankMaterial = getMaterial(materialOptions(materialName));
-
-  return (
-    <group rotation={[0, -0.22, 0]}>
-      {Array.from({ length: room ? 18 : 6 }).map((_, index) => {
-        const row = Math.floor(index / 3);
-        const col = index % 3;
-        const position = [(col - 1) * 0.92 + (row % 2) * 0.25, cross ? 0.12 + row * 0.06 : 0, (row - 2) * 0.55];
-        return (
-          <group key={index} position={position}>
-            <RoundedBox
-              args={[0.9, 0.08, 2.15]}
-              radius={0.012}
-              smoothness={2}
-              material={plankMaterial}
-              castShadow
-              receiveShadow
-            />
-            <ThinLine position={[-0.455, 0.047, 0]} args={[0.012, 0.012, 2.08]} material={getMaterial(mat("charcoal"))} />
-            <ThinLine position={[0.455, 0.047, 0]} args={[0.012, 0.012, 2.08]} material={getMaterial(mat("charcoal"))} />
-            {[-0.55, 0, 0.55].map((z, lineIndex) => (
-              <ThinLine key={z} position={[-0.02 + lineIndex * 0.04, 0.052, z]} args={[0.74, 0.007, 0.012]} material={getMaterial({ ...mat(lineIndex % 2 ? "oak" : "charcoal"), transparent: true, opacity: 0.34, cacheKey: `floor-grain-${lineIndex}-${materialName}` })} />
-            ))}
-          </group>
-        );
-      })}
-      {cross && Array.from({ length: layers }).map((_, index) => (
-        <group key={index} position={[1.65, -0.18 + index * 0.12, 0]}>
-          <mesh material={getMaterial(index === layers - 1 ? materialOptions(materialName) : mat(index % 2 ? "charcoal" : "stone"))}>
-            <boxGeometry args={[0.78, 0.08, 1.9]} />
-          </mesh>
-          <ThinLine position={[0, 0.048, 0]} args={[0.82, 0.012, 1.92]} material={getMaterial(mat("metal"))} />
-        </group>
-      ))}
-      {cross && (
-        <mesh position={[1.65, -0.46, 0]} material={getMaterial(mat("water"))}>
-          <boxGeometry args={[0.86, 0.045, 1.94]} />
-        </mesh>
-      )}
-      {Array.from({ length: 10 }).map((_, index) => (
-        <mesh key={index} position={[-1.1 + index * 0.23, 0.065, -0.42 + (index % 4) * 0.28]} rotation={[0, 0.2, 0]} material={getMaterial(mat("charcoal"))}>
-          <boxGeometry args={[0.16, 0.006, 0.012]} />
-        </mesh>
-      ))}
-      <Annotation visible={annotations} position={[0, 0.7, -1.2]}>plank layout</Annotation>
-      <Annotation visible={annotations && cross} position={[1.65, 0.62, 0]}>layered construction</Annotation>
-    </group>
-  );
-}
-
 function CountertopSystem({ variant, mode, annotations }) {
   const wood = variant.id === "butcher";
   const marble = variant.id === "marble";
@@ -548,128 +493,12 @@ function CountertopSystem({ variant, mode, annotations }) {
   );
 }
 
-function BathSystem({ variant, mode, annotations }) {
-  const shower = variant.id.includes("shower") || variant.id.includes("glass") || variant.id.includes("combo");
-  const tub = variant.id.includes("tub") || variant.id.includes("combo");
-  const glassOff = mode.includes("Glass off");
-  const doorOpen = mode.includes("Door open") ? 0.86 : 0;
-  const footprint = mode.includes("Footprint");
-  const explode = mode.includes("Exploded") ? 0.28 : 0;
-
-  return (
-    <group>
-      <mesh position={[0, -0.38, 0]} material={getMaterial(mat("stone"))} receiveShadow>
-        <boxGeometry args={[3, 0.08, 2.05]} />
-      </mesh>
-      {shower && (
-        <group>
-          <RoundedBox args={[1.42, 0.12, 1.1]} radius={0.035} smoothness={4} position={[-0.45, -0.27 + explode, 0]} material={getMaterial(mat("ivory"))} />
-          {!glassOff && (
-            <>
-              <mesh position={[0.36 + explode, 0.48, 0.5]} material={getMaterial(mat("glass"))}><boxGeometry args={[0.06, 1.62, 1.06]} /></mesh>
-              {[0.02, 0.94].map((z) => <ThinLine key={z} position={[0.4 + explode, 1.23, z]} args={[0.08, 0.04, 0.08]} material={getMaterial(mat("metal"))} />)}
-            </>
-          )}
-          {!glassOff && (
-            <group position={[-0.36, 0.48, 0.5]} rotation={[0, -doorOpen, 0]}>
-              <mesh position={[0.34, 0, 0]} material={getMaterial(mat("glass"))}><boxGeometry args={[0.62, 1.55, 0.05]} /></mesh>
-              <ThinLine position={[0.63, 0.08, 0.045]} args={[0.035, 0.72, 0.035]} material={getMaterial(mat("metal"))} />
-            </group>
-          )}
-          <mesh position={[-0.45, 0.18, -0.52]} material={getMaterial(mat("tile"))}><boxGeometry args={[1.48, 1.28, 0.08]} /></mesh>
-          {[-0.98, -0.72, -0.46, -0.2, 0.06].map((x) => <ThinLine key={x} position={[x, 0.18, -0.47]} args={[0.012, 1.24, 0.012]} material={getMaterial(mat("stone"))} />)}
-          {[-0.26, 0.04, 0.34, 0.64].map((y) => <ThinLine key={y} position={[-0.45, y, -0.465]} args={[1.42, 0.012, 0.012]} material={getMaterial(mat("stone"))} />)}
-          <RoundedBox args={[0.34, 0.26, 0.07]} radius={0.02} smoothness={4} position={[-0.16, 0.34, -0.46]} material={getMaterial(mat("charcoal"))} />
-          <RoundedBox args={[0.42, 0.18, 0.36]} radius={0.025} smoothness={4} position={[-0.95, -0.08, 0.08]} material={getMaterial(mat("stone"))} />
-          <mesh position={[-0.92, 0.32, -0.46]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.055, 0.055, 0.18, 20]} /></mesh>
-          <mesh position={[-0.92, 0.5, -0.4]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.15, 0.15, 0.04, 32]} /></mesh>
-          <mesh position={[-0.72, 0.12, -0.46]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.035, 0.035, 0.08, 18]} /></mesh>
-          <mesh position={[-0.58, 0.12, -0.46]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.035, 0.035, 0.08, 18]} /></mesh>
-          <mesh position={[-0.45, -0.18, 0.15]} material={getMaterial(mat("metal"))}><boxGeometry args={[0.55, 0.025, 0.045]} /></mesh>
-        </group>
-      )}
-      {tub && (
-        <group position={[shower ? 0.82 : 0, 0, 0]}>
-          <mesh position={[0, -0.05 + explode, 0]} scale={[1.28, 0.42, 0.58]} material={getMaterial(mat("ivory"))} castShadow>
-            <sphereGeometry args={[0.82, 48, 18]} />
-          </mesh>
-          <mesh position={[0, 0.12 + explode, 0]} scale={[1.05, 0.2, 0.38]} material={getMaterial(mat("charcoal"))}>
-            <sphereGeometry args={[0.68, 40, 14]} />
-          </mesh>
-          <mesh position={[0.42, 0.12 + explode, 0.46]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}><torusGeometry args={[0.055, 0.01, 10, 28]} /></mesh>
-          <mesh position={[0.74, 0.06 + explode, -0.36]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.045, 0.045, 0.02, 28]} /></mesh>
-          <mesh position={[0.76, 0.36, -0.2]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.025, 0.025, 0.62, 18]} /></mesh>
-          <mesh position={[0.76, 0.68, -0.07]} rotation={[0, 0, Math.PI / 2]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.022, 0.022, 0.28, 18]} /></mesh>
-          <mesh position={[0.62, 0.39, -0.2]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.032, 0.032, 0.08, 18]} /></mesh>
-          <mesh position={[0.9, 0.39, -0.2]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.032, 0.032, 0.08, 18]} /></mesh>
-        </group>
-      )}
-      {footprint && <mesh position={[0, -0.31, 0]} material={getMaterial({ ...mat("water"), opacity: 0.24 })}><boxGeometry args={[2.62, 0.015, 1.64]} /></mesh>}
-      <Annotation visible={annotations} position={[0.55, 1.44, 0.74]}>{shower ? "glass enclosure" : "freestanding form"}</Annotation>
-      <Annotation visible={annotations} position={[-0.52, -0.05, -0.64]}>drain / waterproofing zone</Annotation>
-    </group>
-  );
-}
-
-function ToiletSystem({ variant, mode, annotations }) {
-  const square = variant.id === "square-modern";
-  const bidet = variant.id.includes("bidet") || variant.id === "square-modern";
-  const electric = variant.id === "electric-bidet";
-  const openSeat = mode.includes("Seat") || mode.includes("Lid") || mode.includes("Bidet");
-  const openLid = mode.includes("Lid") ? 1.25 : openSeat ? 0.65 : 0;
-  const explode = mode.includes("Exploded") ? 0.25 : 0;
-
-  return (
-    <group>
-      <RoundedBox args={square ? [1.06, 0.34, 1.16] : [0.98, 0.3, 1.18]} radius={square ? 0.04 : 0.22} smoothness={10} position={[0, 0.1, 0.18 + explode]} material={getMaterial(mat("ivory"))} castShadow />
-      <mesh position={[0, 0.17, 0.18 + explode]} scale={[square ? 0.48 : 0.42, 0.06, variant.id.includes("round") ? 0.42 : 0.58]} material={getMaterial(mat("charcoal"))}>
-        <sphereGeometry args={[1, 40, 12]} />
-      </mesh>
-      <RoundedBox args={[0.9, 0.72, 0.28]} radius={0.045} smoothness={5} position={[0, 0.78 + explode, -0.54]} material={getMaterial(mat("ivory"))} castShadow />
-      <RoundedBox args={[0.96, 0.06, 0.32]} radius={0.025} smoothness={4} position={[0, 1.17 + explode, -0.54]} material={getMaterial(mat("ivory"))} castShadow />
-      <mesh position={[square ? 0.32 : -0.32, 1.23 + explode, -0.42]} material={getMaterial(mat("metal"))}>
-        <cylinderGeometry args={[0.055, 0.055, 0.025, 24]} />
-      </mesh>
-      <RoundedBox args={[0.74, 0.1, 0.94]} radius={square ? 0.025 : 0.16} smoothness={8} position={[0, 0.38 + explode, 0.14]} rotation={[openSeat, 0, 0]} material={getMaterial(electric ? mat("charcoal") : mat("ivory"))} castShadow />
-      <RoundedBox args={[0.78, 0.08, 0.98]} radius={square ? 0.025 : 0.16} smoothness={8} position={[0, 0.45 + explode, 0.1]} rotation={[openLid, 0, 0]} material={getMaterial(mat("ivory"))} castShadow />
-      <RoundedBox args={[0.46, 0.52, 0.44]} radius={square ? 0.035 : 0.12} smoothness={6} position={[0, -0.18, -0.18]} material={getMaterial(mat("ivory"))} castShadow />
-      <mesh position={[-0.28, -0.05, 0.74]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.04, 0.04, 0.035, 18]} /></mesh>
-      <mesh position={[0.28, -0.05, 0.74]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.04, 0.04, 0.035, 18]} /></mesh>
-      <Screw position={[-0.25, 0.42 + explode, -0.3]} scale={0.5} />
-      <Screw position={[0.25, 0.42 + explode, -0.3]} scale={0.5} />
-      <mesh position={[-0.25, 0.31 + explode, 0.47]} material={getMaterial(mat("stone"))}><boxGeometry args={[0.12, 0.035, 0.045]} /></mesh>
-      <mesh position={[0.25, 0.31 + explode, 0.47]} material={getMaterial(mat("stone"))}><boxGeometry args={[0.12, 0.035, 0.045]} /></mesh>
-      {bidet && (
-        <>
-          <mesh position={[0, 0.21, 0.7]} rotation={[Math.PI / 2, 0, 0]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.025, 0.025, 0.38, 18]} /></mesh>
-          <RoundedBox args={[0.22, 0.06, 0.12]} radius={0.02} smoothness={4} position={[0, 0.24, 0.48]} material={getMaterial(mat("ivory"))} />
-        </>
-      )}
-      {electric && <RoundedBox args={[0.15, 0.1, 0.42]} radius={0.025} smoothness={4} position={[0.58, 0.38, 0.06]} material={getMaterial(mat("blackGlass"))} />}
-      {electric && (
-        <>
-          <mesh position={[0.62, 0.16, -0.72]} material={getMaterial(mat("metal"))}><boxGeometry args={[0.035, 0.035, 0.46]} /></mesh>
-          <RoundedBox args={[0.24, 0.36, 0.045]} radius={0.018} smoothness={4} position={[0.78, 0.82, -0.2]} material={getMaterial(mat("blackGlass"))} />
-          {[0.72, 0.82, 0.92].map((y) => <mesh key={y} position={[0.78, y, -0.17]} material={getMaterial(mat("glow"))}><circleGeometry args={[0.018, 16]} /></mesh>)}
-        </>
-      )}
-      <mesh position={[-0.54, 0.12, -0.62]} rotation={[0, 0, Math.PI / 2]} material={getMaterial(mat("metal"))}><cylinderGeometry args={[0.015, 0.015, 0.48, 12]} /></mesh>
-      {mode.includes("Footprint") && <mesh position={[0, -0.08, 0]} material={getMaterial({ ...mat("water"), opacity: 0.24 })}><boxGeometry args={[1.22, 0.014, 1.58]} /></mesh>}
-      <Annotation visible={annotations} position={[0.86, 0.72, 0.2]}>{bidet ? "bidet hardware" : "standard seat"}</Annotation>
-      <Annotation visible={annotations} position={[-0.72, 1.26, -0.55]}>tank form</Annotation>
-    </group>
-  );
-}
-
 function CategoryModel(props) {
   const map = {
     cabinets: CabinetSystem,
     hinges: HingeSystem,
     cooktops: CooktopSystem,
-    flooring: FlooringSystem,
-    countertops: CountertopSystem,
-    bath: BathSystem,
-    toilets: ToiletSystem
+    countertops: CountertopSystem
   };
   const Model = map[props.category.id] || CabinetSystem;
   return <Model {...props} />;

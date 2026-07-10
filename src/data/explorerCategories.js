@@ -72,26 +72,6 @@ export const explorerCategories = [
     }
   },
   {
-    id: "flooring",
-    label: "Flooring",
-    title: "Flooring Material Library",
-    description: "Compare plank layout, construction layers, seams, bevels, reflectivity, and wood grain behavior at sample and room scale.",
-    defaultVariant: "engineered",
-    compareDefault: "hardwood",
-    variants: [
-      { id: "vinyl", name: "Luxury Vinyl", cue: "Waterproof plank with printed wear layer", features: ["Wear layer", "Water-resistant core", "Tight seams", "Wood-look surface"], attributes: { Build: "Layered synthetic", Water: "High resistance", Texture: "Embossed print", Feel: "Practical" } },
-      { id: "laminate", name: "Laminate", cue: "Printed surface over dense core", features: ["Printed visual layer", "Core board", "Click seams", "Durable top coat"], attributes: { Build: "Layered core", Water: "Moderate", Texture: "Printed grain", Feel: "Efficient" } },
-      { id: "engineered", name: "Engineered Wood", cue: "Real veneer over stable core", features: ["Wood veneer", "Layered core", "Premium finish", "Stable construction"], attributes: { Build: "Veneer + core", Water: "Moderate", Texture: "Real wood top", Feel: "Premium" } },
-      { id: "hardwood", name: "Hardwood", cue: "Solid plank with natural grain depth", features: ["Solid wood", "Natural variation", "Beveled edge", "Refinish potential"], attributes: { Build: "Solid plank", Water: "Low", Texture: "Natural grain", Feel: "Classic luxury" } }
-    ],
-    modes: ["Room plane", "Sample block", "Cross-section", "Exploded"],
-    detail: {
-      what: "Flooring changes acoustics, light reflection, maintenance, and how connected a renovation feels room to room.",
-      best: "Engineered wood is a strong premium balance; vinyl works well where water resistance is the priority.",
-      considerations: "Subfloor, transitions, plank direction, finish sheen, and moisture exposure matter as much as color."
-    }
-  },
-  {
     id: "countertops",
     label: "Countertops",
     title: "Countertop Slab Studio",
@@ -112,49 +92,6 @@ export const explorerCategories = [
       what: "Countertops define the work surface, visual weight, edge detail, and how fixtures integrate.",
       best: "Quartz is the polished everyday luxury choice; marble is the dramatic natural statement.",
       considerations: "Thickness, edge profile, seams, sink type, cooktop cutout, finish, and maintenance should be decided together."
-    }
-  },
-  {
-    id: "bath",
-    label: "Shower / Bathtub",
-    title: "Bath Fixture Vignettes",
-    description: "Switch between shower and tub systems, glass panels, doors, drains, niches, benches, faucets, and footprint views.",
-    defaultVariant: "freestanding-tub",
-    compareDefault: "walk-in-shower",
-    variants: [
-      { id: "walk-in-shower", name: "Walk-In Shower", cue: "Open shower with glass panel", features: ["Shower pan", "Glass return", "Linear drain", "Wall fixture"], attributes: { Footprint: "Open", Glass: "Single panel", Access: "Easy", Style: "Spa modern" } },
-      { id: "alcove-tub", name: "Alcove Bathtub", cue: "Built-in tub with apron front", features: ["Apron front", "Wall surround", "Overflow", "Tub filler"], attributes: { Footprint: "Compact", Glass: "Optional", Access: "Step-in", Style: "Classic" } },
-      { id: "freestanding-tub", name: "Freestanding Bathtub", cue: "Sculptural oval centerpiece", features: ["Oval shell", "Floor filler", "Soft radius", "Statement form"], attributes: { Footprint: "Open", Glass: "None", Access: "Soaking", Style: "Luxury spa" } },
-      { id: "shower-tub-combo", name: "Shower-Tub Combo", cue: "Bathing and showering in one bay", features: ["Apron tub", "Glass screen", "Wall shower", "Shared drain"], attributes: { Footprint: "Efficient", Glass: "Screen", Access: "Multi-use", Style: "Practical" } },
-      { id: "frameless-glass", name: "Frameless Glass Shower", cue: "Minimal enclosure with premium glass", features: ["Frameless panels", "Hinged door", "Bench", "Niche"], attributes: { Footprint: "Enclosed", Glass: "Frameless", Access: "Door", Style: "High-end" } },
-      { id: "semi-frameless", name: "Semi-Frameless Shower", cue: "Lean framed detail with cleaner lines", features: ["Slim frame", "Glass door", "Pan base", "Wall fixture"], attributes: { Footprint: "Enclosed", Glass: "Slim frame", Access: "Door", Style: "Transitional" } }
-    ],
-    modes: ["Product", "Vignette", "Glass off", "Door open", "Footprint", "Exploded"],
-    detail: {
-      what: "Bath fixtures determine comfort, access, waterproofing strategy, and the room's sculptural center.",
-      best: "Freestanding tubs create a calm statement; walk-in showers and frameless glass feel open and architectural.",
-      considerations: "Drain location, waterproofing, glass swing, niche placement, and fixture clearance should be planned as one system."
-    }
-  },
-  {
-    id: "toilets",
-    label: "Toilets",
-    title: "Toilet Form + Bidet Explorer",
-    description: "Inspect bowl shape, tank profile, seat and lid behavior, bidet equipment, controls, power detail, and footprint.",
-    defaultVariant: "electric-bidet",
-    compareDefault: "standard-elongated",
-    variants: [
-      { id: "standard-round", name: "Round Standard", cue: "Compact bowl without bidet", features: ["Round bowl", "Tank", "Standard seat", "Compact footprint"], attributes: { Bowl: "Round", Bidet: "None", Power: "No", Profile: "Compact" } },
-      { id: "standard-elongated", name: "Elongated Standard", cue: "Oval comfort bowl without bidet", features: ["Elongated bowl", "Tank", "Comfort seat", "Classic base"], attributes: { Bowl: "Elongated", Bidet: "None", Power: "No", Profile: "Comfort" } },
-      { id: "manual-bidet", name: "Manual Bidet Seat", cue: "Seat attachment with side control", features: ["Nozzle location", "Side dial", "Standard tank", "Retrofit seat"], attributes: { Bowl: "Elongated", Bidet: "Manual", Power: "No", Profile: "Practical" } },
-      { id: "electric-bidet", name: "Electric Bidet Toilet", cue: "Integrated seat, panel, and power detail", features: ["Electric seat", "Control panel", "Nozzle cover", "Power lead"], attributes: { Bowl: "Elongated", Bidet: "Electric", Power: "Required", Profile: "Premium" } },
-      { id: "square-modern", name: "Square Modern", cue: "Angular wall-hugging silhouette", features: ["Square seat", "Crisp base", "Modern tank", "Slim controls"], attributes: { Bowl: "Square", Bidet: "Optional", Power: "Optional", Profile: "Architectural" } }
-    ],
-    modes: ["Closed", "Seat open", "Lid open", "Bidet reveal", "Footprint", "Exploded"],
-    detail: {
-      what: "Toilet selection affects comfort, silhouette, cleaning, bidet planning, and utility requirements.",
-      best: "Electric bidet toilets feel most premium when power and clearances are planned from the start.",
-      considerations: "Bowl shape, seat thickness, control placement, outlet location, and base form all change the final bathroom feel."
     }
   }
 ];

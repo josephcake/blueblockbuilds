@@ -51,7 +51,7 @@ Before launch, replace all `PLACEHOLDER_*` values with verified business details
 
 ## Visual Direction
 
-The site is intentionally focused on interactive 3D renovation storytelling, using modeled kitchens, bathrooms, cabinetry, fixtures, and finish details as the primary proof of craft. The product explorer is data-driven in `src/data/explorerCategories.js`, with reusable React Three Fiber geometry in `src/three/explorer/`.
+The site is intentionally focused on interactive 3D renovation storytelling, using modeled kitchens, cabinetry, appliances, surfaces, and finish details as the primary proof of craft. The product explorer is data-driven in `src/data/explorerCategories.js`, with reusable React Three Fiber geometry in `src/three/explorer/`.
 
 ## Replacing 3D Placeholders
 

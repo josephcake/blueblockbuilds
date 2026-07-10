@@ -48,7 +48,7 @@ export default function InteractiveExplorer() {
           <SectionHeading
             eyebrow="3D product explorer"
             title="A showroom built from the decisions homeowners actually make."
-            body="Explore cabinets, hinges, cooktops, flooring, countertops, bath fixtures, and toilets in a refined interactive system before a project ever becomes a punch list."
+            body="Explore cabinets, hinges, cooktops, and countertops in a refined interactive system before a project ever becomes a punch list."
           />
         </div>
 
