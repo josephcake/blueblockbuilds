@@ -34,7 +34,11 @@ export default function ProjectModal({ project, projects, onClose, onSelect, ret
         ref={dialogRef}
       >
         <button className={styles.close} type="button" onClick={onClose}>Close</button>
-        <div className={styles.heroImage} role="img" aria-label={`${project.title} main image placeholder`} />
+        {project.coverImage ? (
+          <img className={styles.heroImage} src={project.coverImage} alt={`${project.title} main finished project view`} />
+        ) : (
+          <div className={styles.heroImage} role="img" aria-label={`${project.title} main image placeholder`} />
+        )}
         <div className={styles.content}>
           <p className="eyebrow">{project.category} / {project.location} / {project.year}</p>
           <h2 id="project-modal-title">{project.title}</h2>
@@ -45,7 +49,13 @@ export default function ProjectModal({ project, projects, onClose, onSelect, ret
           </ul>
           <h3>Gallery</h3>
           <div className={styles.gallery}>
-            {project.gallery.map((item) => <span key={item}>{item}</span>)}
+            {project.gallery.map((item) => (
+              typeof item === "string" ? (
+                <span key={item}>{item}</span>
+              ) : (
+                <img key={item.src} src={item.src} alt={item.alt} loading="lazy" />
+              )
+            ))}
           </div>
           <BeforeAfter project={project} />
           <div className={styles.controls}>

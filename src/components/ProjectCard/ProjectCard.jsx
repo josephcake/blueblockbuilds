@@ -4,7 +4,11 @@ export default function ProjectCard({ project, index, onOpen }) {
   return (
     <article className={`${styles.card} ${index === 0 ? styles.featured : ""}`}>
       <button type="button" className={styles.imageButton} onClick={onOpen}>
-        <span className={styles.image} role="img" aria-label={`${project.title} placeholder image`} />
+        {project.coverImage ? (
+          <img className={styles.image} src={project.coverImage} alt={`${project.title} finished project`} loading={index === 0 ? "eager" : "lazy"} />
+        ) : (
+          <span className={styles.image} role="img" aria-label={`${project.title} placeholder image`} />
+        )}
         <span className={styles.open}>View project</span>
       </button>
       <div className={styles.meta}>

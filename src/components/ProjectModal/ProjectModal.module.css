@@ -30,7 +30,11 @@
 }
 
 .heroImage {
+  display: block;
+  width: 100%;
+  height: 100%;
   min-height: 540px;
+  object-fit: cover;
   background:
     linear-gradient(130deg, rgba(216, 210, 200, 0.26), transparent 48%),
     linear-gradient(25deg, rgba(47, 125, 255, 0.22), transparent 60%),
@@ -83,6 +87,14 @@
   font-weight: 800;
   font-size: 0.78rem;
   text-transform: uppercase;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  background: #111924;
 }
 
 .controls {

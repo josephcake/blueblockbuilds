@@ -22,7 +22,9 @@
 
 .image {
   display: block;
+  width: 100%;
   aspect-ratio: 1.25 / 1;
+  object-fit: cover;
   background:
     linear-gradient(120deg, rgba(216, 210, 200, 0.22), transparent 42%),
     linear-gradient(20deg, rgba(47, 125, 255, 0.26), transparent 56%),
