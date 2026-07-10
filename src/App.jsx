@@ -3,7 +3,7 @@ import Header from "./components/Header/Header.jsx";
 import Hero from "./components/Hero/Hero.jsx";
 import Expertise from "./components/Expertise/Expertise.jsx";
 import KitchenStory from "./components/KitchenStory/KitchenStory.jsx";
-import ProjectGallery from "./components/ProjectGallery/ProjectGallery.jsx";
+import InteractiveStudio from "./components/InteractiveStudio/InteractiveStudio.jsx";
 import BathroomStory from "./components/BathroomStory/BathroomStory.jsx";
 import Process from "./components/Process/Process.jsx";
 import About from "./components/About/About.jsx";
@@ -54,7 +54,7 @@ export default function App() {
         <Hero />
         <Expertise />
         <KitchenStory />
-        <ProjectGallery />
+        <InteractiveStudio />
         <BathroomStory />
         <Process />
         <About />

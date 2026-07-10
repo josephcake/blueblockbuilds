@@ -14,7 +14,7 @@ function sectionInfluence(id) {
 }
 
 export function useSceneProgress() {
-  const [progress, setProgress] = useState({ hero: 1, kitchen: 0, bathroom: 0, active: "hero" });
+  const [progress, setProgress] = useState({ hero: 1, kitchen: 0, studio: 0, bathroom: 0, active: "hero" });
 
   useEffect(() => {
     let frame = 0;
@@ -23,9 +23,15 @@ export function useSceneProgress() {
       frame = requestAnimationFrame(() => {
         const hero = sectionInfluence("top");
         const kitchen = sectionInfluence("kitchen");
+        const studio = sectionInfluence("studio");
         const bathroom = sectionInfluence("bathroom");
-        const active = kitchen > bathroom && kitchen > hero ? "kitchen" : bathroom > kitchen && bathroom > hero ? "bathroom" : "hero";
-        setProgress({ hero, kitchen, bathroom, active });
+        const active = [
+          ["hero", hero],
+          ["kitchen", kitchen],
+          ["studio", studio],
+          ["bathroom", bathroom]
+        ].sort((a, b) => b[1] - a[1])[0][0];
+        setProgress({ hero, kitchen, studio, bathroom, active });
       });
     };
     update();

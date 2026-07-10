@@ -44,16 +44,13 @@ The estimate form posts `FormData` to this endpoint. It is ready for Formspree, 
 ## Editing Content
 
 - Services: `src/data/services.js`
-- Projects: `src/data/projects.js`
 - Process, service area, contact placeholders: `src/data/site.js`
 
 Before launch, replace all `PLACEHOLDER_*` values with verified business details. Do not add license numbers, claims, or awards unless they are confirmed.
 
-## Project Images
+## Visual Direction
 
-The portfolio uses local optimized project photography. Add real optimized images under `public/images/projects/`, then update `coverImage` and `gallery` in `src/data/projects.js`.
-
-Use AVIF or WebP with multiple responsive sizes where possible.
+The site is intentionally focused on interactive 3D renovation storytelling, using modeled kitchens, bathrooms, cabinetry, fixtures, and finish details as the primary proof of craft.
 
 ## Replacing 3D Placeholders
 
@@ -90,5 +87,5 @@ WebGL fallback testing:
 - Canonical URL in `index.html`
 - Open Graph image in `index.html`
 - Phone, email, Instagram, contractor registration in `src/data/site.js`
-- Real project imagery and detailed project descriptions
+- Verified business copy, testimonials, and service proof points
 - Verified contact form endpoint

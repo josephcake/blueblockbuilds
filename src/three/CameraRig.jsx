@@ -11,10 +11,10 @@ export default function CameraRig() {
   const progress = useSceneProgress();
 
   useFrame(() => {
-    const snap = Math.max(progress.kitchen, progress.bathroom);
+    const snap = Math.max(progress.kitchen, progress.studio, progress.bathroom);
     const z = 7.4 - snap * 0.95;
-    const y = 1.4 + progress.bathroom * 0.36 + progress.kitchen * 0.14;
-    const x = progress.kitchen * -0.24 + progress.bathroom * 0.18;
+    const y = 1.4 + progress.bathroom * 0.36 + progress.kitchen * 0.14 + progress.studio * 0.22;
+    const x = progress.kitchen * -0.24 + progress.studio * -0.06 + progress.bathroom * 0.18;
     camera.position.x = MathUtils.lerp(camera.position.x, x + pointer.x * 0.38, 0.055);
     camera.position.y = MathUtils.lerp(camera.position.y, y + pointer.y * 0.22, 0.055);
     camera.position.z = MathUtils.lerp(camera.position.z, z, 0.055);

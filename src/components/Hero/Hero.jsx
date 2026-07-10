@@ -12,7 +12,7 @@ export default function Hero() {
           </p>
           <div className={styles.actions}>
             <a href="#contact">Start Your Project</a>
-            <a href="#work">Explore Our Work</a>
+            <a href="#studio">Explore the Studio</a>
           </div>
         </div>
       </div>

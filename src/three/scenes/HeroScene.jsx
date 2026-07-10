@@ -24,47 +24,48 @@ export default function HeroScene() {
   useFrame(({ clock }) => {
     const time = clock.elapsedTime;
     const kitchenSnap = progress.kitchen;
+    const studioSnap = progress.studio;
     const bathroomSnap = progress.bathroom;
-    const anySnap = Math.max(kitchenSnap, bathroomSnap);
+    const anySnap = Math.max(kitchenSnap, studioSnap, bathroomSnap);
 
     if (group.current) {
       group.current.rotation.y = Math.sin(time * 0.18) * 0.09 + kitchenSnap * -0.2 + bathroomSnap * 0.32;
       group.current.rotation.x = 0.08 + Math.sin(time * 0.13) * 0.025;
-      group.current.position.x = MathUtils.lerp(group.current.position.x, MathUtils.lerp(1.68, 0.85, anySnap), 0.055);
-      group.current.position.y = MathUtils.lerp(group.current.position.y, Math.sin(time * 0.36) * 0.08 + bathroomSnap * 0.12, 0.055);
+      group.current.position.x = MathUtils.lerp(group.current.position.x, MathUtils.lerp(1.68, 0.85, anySnap) - studioSnap * 0.24, 0.055);
+      group.current.position.y = MathUtils.lerp(group.current.position.y, Math.sin(time * 0.36) * 0.08 + studioSnap * 0.08 + bathroomSnap * 0.12, 0.055);
     }
 
     if (kitchen.current) {
-      kitchen.current.position.x = MathUtils.lerp(kitchen.current.position.x, -0.5 + kitchenSnap * 0.95 - bathroomSnap * 4.6, 0.08);
-      kitchen.current.position.y = MathUtils.lerp(kitchen.current.position.y, kitchenSnap * 0.08, 0.08);
-      kitchen.current.position.z = MathUtils.lerp(kitchen.current.position.z, kitchenSnap * 1.15 - bathroomSnap * 1.8, 0.08);
-      kitchen.current.rotation.y = MathUtils.lerp(kitchen.current.rotation.y, -0.28 + kitchenSnap * 0.66, 0.08);
-      const kitchenScale = 1 + kitchenSnap * 0.24 - bathroomSnap * 0.36;
+      kitchen.current.position.x = MathUtils.lerp(kitchen.current.position.x, -0.5 + kitchenSnap * 0.95 + studioSnap * 0.24 - bathroomSnap * 4.6, 0.08);
+      kitchen.current.position.y = MathUtils.lerp(kitchen.current.position.y, kitchenSnap * 0.08 + studioSnap * 0.18, 0.08);
+      kitchen.current.position.z = MathUtils.lerp(kitchen.current.position.z, kitchenSnap * 1.15 + studioSnap * 1.35 - bathroomSnap * 1.8, 0.08);
+      kitchen.current.rotation.y = MathUtils.lerp(kitchen.current.rotation.y, -0.28 + kitchenSnap * 0.66 + studioSnap * 0.48, 0.08);
+      const kitchenScale = 1 + kitchenSnap * 0.24 + studioSnap * 0.18 - bathroomSnap * 0.36;
       kitchen.current.scale.setScalar(MathUtils.lerp(kitchen.current.scale.x, kitchenScale, 0.08));
     }
 
     if (bath.current) {
-      bath.current.position.x = MathUtils.lerp(bath.current.position.x, 1.45 - bathroomSnap * 2.72 + kitchenSnap * 2.4, 0.08);
-      bath.current.position.y = MathUtils.lerp(bath.current.position.y, bathroomSnap * 0.22, 0.08);
-      bath.current.position.z = MathUtils.lerp(bath.current.position.z, -0.46 + bathroomSnap * 1.28 - kitchenSnap * 0.75, 0.08);
-      bath.current.rotation.y = MathUtils.lerp(bath.current.rotation.y, 0.42 - bathroomSnap * 0.64, 0.08);
-      const bathScale = 1 + bathroomSnap * 0.22 - kitchenSnap * 0.1;
+      bath.current.position.x = MathUtils.lerp(bath.current.position.x, 1.45 - studioSnap * 1.34 - bathroomSnap * 2.72 + kitchenSnap * 2.4, 0.08);
+      bath.current.position.y = MathUtils.lerp(bath.current.position.y, studioSnap * 0.1 + bathroomSnap * 0.22, 0.08);
+      bath.current.position.z = MathUtils.lerp(bath.current.position.z, -0.46 + studioSnap * 0.88 + bathroomSnap * 1.28 - kitchenSnap * 0.75, 0.08);
+      bath.current.rotation.y = MathUtils.lerp(bath.current.rotation.y, 0.42 - studioSnap * 0.36 - bathroomSnap * 0.64, 0.08);
+      const bathScale = 1 + studioSnap * 0.08 + bathroomSnap * 0.22 - kitchenSnap * 0.1;
       bath.current.scale.setScalar(MathUtils.lerp(bath.current.scale.x, bathScale, 0.08));
     }
 
     if (toilet.current) {
-      toilet.current.position.x = MathUtils.lerp(toilet.current.position.x, 2.3 - bathroomSnap * 0.78 + kitchenSnap * 2.2, 0.08);
-      toilet.current.position.y = MathUtils.lerp(toilet.current.position.y, -0.5 + bathroomSnap * 0.22, 0.08);
-      toilet.current.position.z = MathUtils.lerp(toilet.current.position.z, -0.18 + bathroomSnap * 1.12 - kitchenSnap * 0.8, 0.08);
-      toilet.current.rotation.y = MathUtils.lerp(toilet.current.rotation.y, -0.36 + bathroomSnap * 0.58, 0.08);
-      const toiletScale = 0.78 + bathroomSnap * 0.22;
+      toilet.current.position.x = MathUtils.lerp(toilet.current.position.x, 2.3 - studioSnap * 0.52 - bathroomSnap * 0.78 + kitchenSnap * 2.2, 0.08);
+      toilet.current.position.y = MathUtils.lerp(toilet.current.position.y, -0.5 + studioSnap * 0.12 + bathroomSnap * 0.22, 0.08);
+      toilet.current.position.z = MathUtils.lerp(toilet.current.position.z, -0.18 + studioSnap * 0.84 + bathroomSnap * 1.12 - kitchenSnap * 0.8, 0.08);
+      toilet.current.rotation.y = MathUtils.lerp(toilet.current.rotation.y, -0.36 + studioSnap * 0.28 + bathroomSnap * 0.58, 0.08);
+      const toiletScale = 0.78 + studioSnap * 0.12 + bathroomSnap * 0.22;
       toilet.current.scale.setScalar(MathUtils.lerp(toilet.current.scale.x, toiletScale, 0.08));
     }
 
     if (pendant.current) {
       pendant.current.rotation.z = Math.sin(time * 0.7) * 0.035;
-      pendant.current.position.y = 2.12 + Math.sin(time * 0.52) * 0.06 + kitchenSnap * 0.14;
-      pendant.current.position.z = MathUtils.lerp(pendant.current.position.z, kitchenSnap * 0.8, 0.06);
+      pendant.current.position.y = 2.12 + Math.sin(time * 0.52) * 0.06 + kitchenSnap * 0.14 + studioSnap * 0.08;
+      pendant.current.position.z = MathUtils.lerp(pendant.current.position.z, kitchenSnap * 0.8 + studioSnap * 0.62, 0.06);
     }
 
     if (samples.current) {
