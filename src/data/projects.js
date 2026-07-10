@@ -53,7 +53,7 @@ export const projects = [
     year: "2026",
     summary: "Finished living space work with cleaner surfaces, room details, and a calmer material palette.",
     description: "A grouped living space portfolio showing final room views, surface updates, trim, wall details, and finish selections.",
-    coverImage: "/images/projects/living-room/living_room1.jpeg",
+    coverImage: "/images/projects/living-room/living_room5.jpeg",
     gallery: [
       { src: "/images/projects/living-room/living_room2.jpeg", alt: "Living space seating area detail" },
       { src: "/images/projects/living-room/living_room3.jpeg", alt: "Living space wall and finish detail" },
